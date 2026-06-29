@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: '/admin', icon: '📊', label: 'Dashboard', end: true },
   { to: '/admin/articulos', icon: '📝', label: 'Artículos' },
   { to: '/admin/noticias', icon: '📰', label: 'Noticias' },
+  { to: '/admin/recursos', icon: '📚', label: 'Recursos' },
   { to: '/admin/mensajes', icon: '✉️', label: 'Mensajes' },
 ]
 

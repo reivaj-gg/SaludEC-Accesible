@@ -137,7 +137,19 @@ export default function AdminArticulos() {
                   <td className="articulos-td-titulo">{a.titulo}</td>
                   <td>{a.categoria || '—'}</td>
                   <td><code className="admin-slug">{a.slug}</code></td>
-                  <td><Badge variant={a.publicado ? 'success' : 'warning'}>{a.publicado ? 'Publicado' : 'Borrador'}</Badge></td>
+                  <td>
+                    <button
+                      className="estado-toggle"
+                      onClick={async () => {
+                        await actualizarArticulo(a.id, { publicado: !a.publicado })
+                        setArticulos((p) => p.map((x) => x.id === a.id ? { ...x, publicado: !x.publicado } : x))
+                        toast.success(a.publicado ? 'Artículo ocultado.' : 'Artículo publicado.')
+                      }}
+                      aria-label={`${a.publicado ? 'Ocultar' : 'Publicar'} "${a.titulo}"`}
+                    >
+                      <Badge variant={a.publicado ? 'success' : 'warning'}>{a.publicado ? 'Publicado' : 'Borrador'}</Badge>
+                    </button>
+                  </td>
                   <td className="articulos-td-actions">
                     <Button variant="ghost" size="sm" onClick={() => abrirEditar(a)}>Editar</Button>
                     <Button variant="danger" size="sm" onClick={() => eliminar(a.id)}>Eliminar</Button>
