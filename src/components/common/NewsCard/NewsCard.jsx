@@ -22,6 +22,7 @@ export default function NewsCard({ noticia, featured = false }) {
           <img
             src={imgUrl}
             alt={imgAlt}
+            title={imgAlt}
             className="news-card__img"
             loading={featured ? 'eager' : 'lazy'}
             width={featured ? 800 : 400}

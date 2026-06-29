@@ -9,6 +9,21 @@ import Spinner from '@components/ui/Spinner/Spinner'
 import { getNoticiaById } from '@services/noticias.service'
 import './NoticiasDetalle.css'
 
+const mdComponents = {
+  img({ src, alt, title }) {
+    const descr = alt || title || 'Imagen de la noticia'
+    return (
+      <img
+        src={src}
+        alt={descr}
+        title={title || descr}
+        loading="lazy"
+        style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }}
+      />
+    )
+  },
+}
+
 export default function NoticiasDetalle() {
   const { id } = useParams()
   const [noticia, setNoticia] = useState(null)
@@ -59,6 +74,7 @@ export default function NoticiasDetalle() {
               <img
                 src={imgUrl}
                 alt={imgAlt}
+                title={imgAlt}
                 className="noticia-articulo__img"
                 loading="eager"
                 width={1200}
@@ -88,7 +104,9 @@ export default function NoticiasDetalle() {
 
           {noticia.contenido && (
             <div className="prose noticia-articulo__body">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{noticia.contenido}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+                {noticia.contenido}
+              </ReactMarkdown>
             </div>
           )}
 

@@ -21,7 +21,8 @@ export default function ResourceCard({ recurso }) {
         {thumbnail?.url ? (
           <img
             src={thumbnail.url}
-            alt={thumbnail.alt || ''}
+            alt={thumbnail.alt || titulo}
+            title={thumbnail.alt || titulo}
             loading="lazy"
             className="resource-card__img"
             width={320}

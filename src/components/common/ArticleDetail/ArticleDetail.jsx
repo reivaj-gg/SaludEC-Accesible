@@ -14,6 +14,23 @@ const MODULO_LABEL = {
   'prevencion': 'Prevención',
 }
 
+// Renderer para imágenes dentro del contenido Markdown
+const mdComponents = {
+  img({ src, alt, title }) {
+    const descr = alt || title || 'Imagen del artículo'
+    return (
+      <img
+        src={src}
+        alt={descr}
+        title={title || descr}
+        loading="lazy"
+        className="prose-img"
+        style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }}
+      />
+    )
+  },
+}
+
 export default function ArticleDetail({ articulo, volverRuta, volverLabel, moduloPath }) {
   const fecha = articulo.actualizadoEn?.toDate?.() ?? articulo.creadoEn?.toDate?.()
   const fechaStr = fecha?.toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -34,10 +51,11 @@ export default function ArticleDetail({ articulo, volverRuta, volverLabel, modul
 
         <article aria-labelledby="articulo-titulo">
           {articulo.imagen?.url && (
-            <div className="article-detail__hero" role="img" aria-label={articulo.imagen.alt || articulo.titulo}>
+            <div className="article-detail__hero">
               <img
                 src={articulo.imagen.url}
-                alt={articulo.imagen.alt || ''}
+                alt={articulo.imagen.alt || articulo.titulo}
+                title={articulo.imagen.alt || articulo.titulo}
                 className="article-detail__hero-img"
                 loading="eager"
                 width={1200}
@@ -71,7 +89,9 @@ export default function ArticleDetail({ articulo, volverRuta, volverLabel, modul
           </header>
 
           <div className="prose article-detail__body">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{contenidoLimpio}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+              {contenidoLimpio}
+            </ReactMarkdown>
           </div>
 
           {articulo.fuentes && (
