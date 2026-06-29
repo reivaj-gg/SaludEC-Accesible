@@ -16,15 +16,27 @@ const CUBE_MODS = [
 
 function HeroCube({ noticias }) {
   const sceneRef = useRef(null)
-  const rafRef = useRef(null)
-  const drag = useRef({ active: false, moved: false, startX: 0, startY: 0, lastX: 0, lastY: 0, rotX: -25, rotY: 0 })
+  const rafRef   = useRef(null)
+  const drag     = useRef({
+    active: false, moved: false,
+    startX: 0, startY: 0,
+    lastX: 0,  lastY: 0,
+    rotX: -20, rotY: 0,
+  })
+  const reducedMotion = useRef(
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
 
   useEffect(() => {
     const d = drag.current
+    const SPEED = 360 / (20 * 60)   // una vuelta cada ~20 s a 60 fps
+
     const tick = () => {
-      if (!d.active) d.rotY += 360 / (18 * 60)
+      if (!d.active && !reducedMotion.current) d.rotY += SPEED
       if (sceneRef.current) {
-        sceneRef.current.style.transform = `rotateX(${d.rotX}deg) rotateY(${d.rotY}deg)`
+        sceneRef.current.style.transform =
+          `rotateX(${d.rotX}deg) rotateY(${d.rotY}deg)`
       }
       rafRef.current = requestAnimationFrame(tick)
     }
@@ -35,17 +47,17 @@ function HeroCube({ noticias }) {
       if (!dd.active) return
       const cx = e.touches ? e.touches[0].clientX : e.clientX
       const cy = e.touches ? e.touches[0].clientY : e.clientY
-      if (Math.hypot(cx - dd.startX, cy - dd.startY) > 5) dd.moved = true
-      dd.rotY += (cx - dd.lastX) * 0.6
-      dd.rotX  = Math.max(-70, Math.min(30, dd.rotX - (cy - dd.lastY) * 0.6))
+      if (Math.hypot(cx - dd.startX, cy - dd.startY) > 4) dd.moved = true
+      dd.rotY += (cx - dd.lastX) * 0.7
+      dd.rotX  = Math.max(-75, Math.min(35, dd.rotX - (cy - dd.lastY) * 0.7))
       dd.lastX = cx; dd.lastY = cy
     }
     const onUp = () => { drag.current.active = false }
 
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseup',   onUp)
-    document.addEventListener('touchmove', onMove, { passive: true })
-    document.addEventListener('touchend',  onUp)
+    document.addEventListener('touchmove', onMove, { passive: false })
+    document.addEventListener('touchend',  onUp,   { passive: true  })
 
     return () => {
       cancelAnimationFrame(rafRef.current)
@@ -71,6 +83,7 @@ function HeroCube({ noticias }) {
     d.active = true; d.moved = false
     d.startX = t.clientX; d.startY = t.clientY
     d.lastX  = t.clientX; d.lastY  = t.clientY
+    e.preventDefault()
   }
 
   const onClickCapture = (e) => { if (drag.current.moved) e.stopPropagation() }

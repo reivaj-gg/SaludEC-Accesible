@@ -532,7 +532,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
-  padding: 60px 40px 32px;
+  padding: 28px 40px 32px;
   perspective: 700px;
   perspective-origin: 50% 45%;
   width: 100%;
@@ -652,8 +652,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* La rotación la controla JS vía rAF — no hay animation CSS que parar aquí */
-  .hero-cube { pointer-events: none; }
+  /* La rotación automática se detiene en JS; el drag manual sigue habilitado */
+  .hero-cube { cursor: grab; }
 }
 
 /* ── Ecuador en cifras de salud ── */
