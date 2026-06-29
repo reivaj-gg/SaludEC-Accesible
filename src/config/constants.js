@@ -9,6 +9,13 @@ export const MODULOS = {
   PREVENCION: 'prevencion',
 }
 
+export const MODULOS_LIST = [
+  { id: 'nutricion', nombre: 'Nutrición' },
+  { id: 'actividad-fisica', nombre: 'Actividad Física' },
+  { id: 'salud-mental', nombre: 'Salud Mental' },
+  { id: 'prevencion', nombre: 'Prevención' },
+]
+
 export const TIPOS_RECURSO = {
   INFOGRAFIA: 'infografia',
   VIDEO: 'video',
