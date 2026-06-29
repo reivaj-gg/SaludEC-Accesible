@@ -16,13 +16,12 @@ export default function NewsCard({ noticia, featured = false }) {
   const imgAlt = typeof imagen === 'string' ? titulo : (imagen?.alt || titulo)
 
   return (
-    <article className={`news-card ${featured ? 'news-card--featured' : ''}`}>
+    <article className={`news-card ${featured ? 'news-card--featured' : ''}`} title={imgAlt}>
       {imgUrl && (
         <Link to={`/noticias/${id}`} tabIndex={-1} aria-hidden="true" className="news-card__img-link">
           <img
             src={imgUrl}
             alt={imgAlt}
-            title={imgAlt}
             className="news-card__img"
             loading={featured ? 'eager' : 'lazy'}
             width={featured ? 800 : 400}

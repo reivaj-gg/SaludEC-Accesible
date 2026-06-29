@@ -16,13 +16,12 @@ export default function ResourceCard({ recurso }) {
   const isExternal = url?.startsWith('http')
 
   return (
-    <article className="resource-card">
+    <article className="resource-card" title={thumbnail?.alt || titulo}>
       <div className="resource-card__thumb">
         {thumbnail?.url ? (
           <img
             src={thumbnail.url}
             alt={thumbnail.alt || titulo}
-            title={thumbnail.alt || titulo}
             loading="lazy"
             className="resource-card__img"
             width={320}
