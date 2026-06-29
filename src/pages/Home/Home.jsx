@@ -8,10 +8,10 @@ import { getNoticias } from '@services/noticias.service'
 import './Home.css'
 
 const CUBE_MODS = [
-  { pos: 'front',  icon: '🥗', title: 'Nutrición',       sub: 'Alimentación saludable', path: ROUTES.NUTRICION,        bg: 'rgba(22,163,74,0.10)',  glow: '#4ade80' },
-  { pos: 'right',  icon: '🏃', title: 'Actividad Física', sub: 'Rutinas y ejercicio',    path: ROUTES.ACTIVIDAD_FISICA, bg: 'rgba(234,88,12,0.10)',  glow: '#fb923c' },
-  { pos: 'back',   icon: '🧠', title: 'Salud Mental',     sub: 'Bienestar emocional',    path: ROUTES.SALUD_MENTAL,    bg: 'rgba(147,51,234,0.10)', glow: '#c084fc' },
-  { pos: 'left',   icon: '🛡️', title: 'Prevención',       sub: 'Cuida tu salud',         path: ROUTES.PREVENCION,      bg: 'rgba(21,101,192,0.10)', glow: '#60a5fa' },
+  { pos: 'front', icon: '🏥', title: 'Atención Primaria', sub: 'Consultas y centros',  path: ROUTES.NUTRICION,        bg: 'rgba(22,163,74,0.10)',  glow: '#4ade80' },
+  { pos: 'right', icon: '💉', title: 'Vacunación',         sub: 'Esquemas y programas', path: ROUTES.ACTIVIDAD_FISICA, bg: 'rgba(14,165,233,0.10)', glow: '#38bdf8' },
+  { pos: 'back',  icon: '🧠', title: 'Salud Mental',       sub: 'Servicios públicos',   path: ROUTES.SALUD_MENTAL,    bg: 'rgba(147,51,234,0.10)', glow: '#c084fc' },
+  { pos: 'left',  icon: '🚨', title: 'Emergencias',         sub: 'SAMU · ECU 911',      path: ROUTES.PREVENCION,      bg: 'rgba(220,38,38,0.10)',  glow: '#f87171' },
 ]
 
 function HeroCube({ noticias }) {
@@ -115,10 +115,10 @@ function HeroCube({ noticias }) {
 }
 
 const MODULES = [
-  { icon: '🥗', title: 'Nutrición', description: 'Guías alimenticias, recetas saludables y todo sobre hidratación y vitaminas.', path: ROUTES.NUTRICION, color: 'green' },
-  { icon: '🏃', title: 'Actividad Física', description: 'Rutinas para todos los niveles, estiramientos y ejercicios de oficina.', path: ROUTES.ACTIVIDAD_FISICA, color: 'orange' },
-  { icon: '🧠', title: 'Salud Mental', description: 'Mindfulness, manejo del estrés, sueño y bienestar emocional.', path: ROUTES.SALUD_MENTAL, color: 'purple' },
-  { icon: '🛡️', title: 'Prevención', description: 'Información sobre diabetes, hipertensión, vacunación y chequeos médicos.', path: ROUTES.PREVENCION, color: 'blue' },
+  { icon: '🏥', title: 'Atención Primaria', description: 'Centros de salud del MSP e IESS, cómo sacar turnos y qué servicios ofrece el primer nivel de atención.', path: ROUTES.NUTRICION, color: 'green' },
+  { icon: '💉', title: 'Vacunación',         description: 'Esquema nacional de vacunación, campañas del MSP, requisitos y puntos de vacunación en tu provincia.', path: ROUTES.ACTIVIDAD_FISICA, color: 'orange' },
+  { icon: '🧠', title: 'Salud Mental',       description: 'Servicios públicos de salud mental, líneas de crisis, centros de atención psicológica y recursos de apoyo.', path: ROUTES.SALUD_MENTAL, color: 'purple' },
+  { icon: '🚨', title: 'Emergencias',         description: 'ECU 911, SAMU, protocolos ante emergencias médicas, hospitales de guardia y primeros auxilios básicos.', path: ROUTES.PREVENCION, color: 'blue' },
 ]
 
 const STATS = [
@@ -129,10 +129,10 @@ const STATS = [
 ]
 
 const FEATURES = [
-  { icon: '🔬', title: 'Basado en evidencia', desc: 'Contenido respaldado por guías de la OMS, CDC y el Ministerio de Salud del Ecuador.' },
-  { icon: '♿', title: 'Universalmente accesible', desc: 'Diseñado bajo WCAG 2.2 Nivel AA para que nadie quede fuera por sus capacidades.' },
+  { icon: '🏛️', title: 'Información oficial', desc: 'Contenido basado en fuentes del MSP, IESS, OPS y organismos de salud pública del Ecuador.' },
+  { icon: '♿', title: 'Universalmente accesible', desc: 'Diseñado bajo WCAG 2.2 Nivel AA para que ningún ciudadano quede fuera por sus capacidades.' },
   { icon: '🔒', title: 'Sin publicidad ni datos', desc: 'No rastreamos a nuestros usuarios. Tu privacidad es un principio, no una política.' },
-  { icon: '📱', title: 'Funciona en todo', desc: 'Optimizado para móvil, tablet y escritorio. Instalable como app desde el navegador.' },
+  { icon: '📱', title: 'Funciona en todo', desc: 'Optimizado para móvil, tablet y escritorio. Accesible desde cualquier dispositivo, en cualquier momento.' },
 ]
 
 export default function Home() {
@@ -149,22 +149,22 @@ export default function Home() {
   return (
     <PageWrapper
       title="Inicio"
-      description="Plataforma digital de salud preventiva. Nutrición, actividad física, salud mental y prevención de enfermedades."
+      description="Portal de servicios públicos de salud en Ecuador. Atención primaria, vacunación, salud mental y emergencias."
     >
       {/* ── Hero ── */}
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero__bg" aria-hidden="true" />
         <div className="hero__content container">
           <div className="hero__text animate-fade-in-up">
-            <span className="hero__tag">Plataforma de salud preventiva · Ecuador</span>
+            <span className="hero__tag">Servicios públicos de salud · Ecuador</span>
             <h1 id="hero-title" className="hero__title">
-              Tu bienestar<br />
-              <span className="hero__title-accent">comienza con la</span><br />
-              prevención
+              Tu salud,<br />
+              <span className="hero__title-accent">un derecho</span><br />
+              garantizado
             </h1>
             <p className="hero__description">
-              Información confiable sobre salud física y mental, diseñada para
-              todas las personas. Sin publicidad, sin registro, sin barreras.
+              Accede a información oficial sobre servicios públicos de salud en Ecuador.
+              Atención primaria, vacunación, emergencias y más. Sin barreras.
             </p>
             <div className="hero__actions">
               <Link to={ROUTES.NUTRICION} className="btn btn--primary btn--lg">
@@ -175,7 +175,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="hero__trust">
-              <span>✓ Basado en evidencia OMS</span>
+              <span>✓ Fuentes MSP · OPS · IESS</span>
               <span>✓ WCAG 2.2 AA</span>
               <span>✓ Gratuito</span>
             </div>
@@ -210,10 +210,10 @@ export default function Home() {
       <section className="section" aria-labelledby="modules-title">
         <div className="container">
           <header className="section__header">
-            <span className="section__tag">Explora</span>
-            <h2 id="modules-title" className="section__title">Áreas de salud preventiva</h2>
+            <span className="section__tag">Servicios</span>
+            <h2 id="modules-title" className="section__title">Servicios públicos de salud</h2>
             <p className="section__subtitle">
-              Información organizada por especialidades, accesible para toda la familia.
+              Encuentra información oficial sobre los servicios de salud disponibles para todos los ecuatorianos.
             </p>
           </header>
           <ul className="modules-grid" role="list">
@@ -238,8 +238,8 @@ export default function Home() {
             <span className="section__tag">Nuestra propuesta</span>
             <h2 id="features-title" className="section__title">¿Por qué VitaPrevent?</h2>
             <p className="section__subtitle">
-              Una plataforma diseñada con un propósito claro: democratizar el acceso a
-              información de salud confiable para todos los ecuatorianos.
+              Un portal diseñado para que cualquier ciudadano ecuatoriano pueda conocer
+              y acceder a los servicios públicos de salud sin barreras.
             </p>
           </header>
           <ul className="features-grid" role="list">

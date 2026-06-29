@@ -12,23 +12,23 @@ import './Prevencion.css'
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
-  { label: 'Vacunas', valor: 'vacunas' },
-  { label: 'Chequeos', valor: 'chequeos' },
-  { label: 'Hábitos', valor: 'habitos' },
+  { label: 'Protocolos', valor: 'protocolos' },
+  { label: 'Primeros auxilios', valor: 'primeros-auxilios' },
+  { label: 'SAMU · ECU 911', valor: 'samu' },
 ]
 
 const PILARES = [
-  { icon: '💉', title: 'Vacunación', desc: 'Las vacunas son la herramienta de salud pública más efectiva para prevenir enfermedades infecciosas.', color: 'blue' },
-  { icon: '🔬', title: 'Tamizajes y chequeos', desc: 'Los controles médicos periódicos permiten detectar enfermedades en etapas tempranas cuando son más tratables.', color: 'teal' },
-  { icon: '🚭', title: 'Factores de riesgo', desc: 'Identificar y modificar factores de riesgo como el tabaco, el sedentarismo o la dieta reduce la carga de enfermedad.', color: 'orange' },
-  { icon: '🌿', title: 'Entorno saludable', desc: 'El ambiente físico y social donde vivimos influye directamente en nuestra salud y calidad de vida.', color: 'green' },
+  { icon: '📞', title: 'ECU 911', desc: 'Número único de emergencias en Ecuador para policía, bomberos y emergencias médicas. Disponible 24/7.', color: 'blue' },
+  { icon: '🚑', title: 'SAMU', desc: 'Servicio de Atención Médica de Urgencias: ambulancias medicalizadas para emergencias graves y críticas.', color: 'teal' },
+  { icon: '🏥', title: 'Hospitales de guardia', desc: 'Los hospitales del MSP mantienen guardia permanente para atención de emergencias sin necesidad de turno.', color: 'orange' },
+  { icon: '🩹', title: 'Primeros auxilios', desc: 'Conocer los protocolos básicos de primeros auxilios puede salvar una vida mientras llega la ayuda profesional.', color: 'green' },
 ]
 
 const FAQS = [
-  { id: 'pv1', question: '¿Cuáles son las enfermedades crónicas más prevalentes en Ecuador?', answer: 'Las enfermedades cardiovasculares, la diabetes tipo 2, la hipertensión arterial y el cáncer son las principales causas de morbimortalidad en Ecuador, muchas de ellas prevenibles con cambios de estilo de vida.' },
-  { id: 'pv2', question: '¿Con qué frecuencia debo hacerme chequeos médicos?', answer: 'Para adultos sanos se recomienda un chequeo general anual. La frecuencia puede variar según la edad, sexo, antecedentes familiares y factores de riesgo presentes. Tu médico es quien mejor puede orientarte.' },
-  { id: 'pv3', question: '¿Qué vacunas deben tener los adultos?', answer: 'Además del esquema infantil completo, los adultos deben actualizar la vacuna contra el tétanos, y según su situación: influenza anual, hepatitis B, neumococo, herpes zóster y otras recomendadas por el MSP.' },
-  { id: 'pv4', question: '¿La prevención primaria y secundaria son lo mismo?', answer: 'No. La prevención primaria evita que aparezca la enfermedad (vacunas, dieta, ejercicio). La secundaria detecta enfermedades en etapas tempranas mediante tamizajes (mamografías, Papanicolau, glucosa en ayunas). La terciaria reduce complicaciones de enfermedades ya establecidas.' },
+  { id: 'em1', question: '¿Cuándo debo llamar al ECU 911?', answer: 'Llama al 911 ante cualquier emergencia que requiera respuesta inmediata: pérdida de consciencia, dificultad para respirar, dolor de pecho intenso, accidente grave, incendio, crimen en curso o cualquier situación que ponga en riesgo una vida.' },
+  { id: 'em2', question: '¿Qué es el SAMU y cómo se activa?', answer: 'El SAMU (Servicio de Atención Médica de Urgencias) es activado automáticamente cuando el ECU 911 determina que se necesita una ambulancia medicalizada. También puedes solicitarlo directamente al llamar al 911 describiendo la emergencia médica.' },
+  { id: 'em3', question: '¿La atención de emergencias en hospitales del MSP es gratuita?', answer: 'Sí. Por ley, ningún hospital público puede negar la atención de emergencias ni condicionarla al pago previo. La atención de urgencias y emergencias en la red pública es gratuita para todos, independientemente de si son afiliados al IESS o no.' },
+  { id: 'em4', question: '¿Qué hago ante un infarto o ACV?', answer: 'Ante dolor de pecho intenso o síntomas de ACV (cara caída, brazo débil, dificultad para hablar): llama inmediatamente al 911. No conduzcas al hospital por tu cuenta. El tiempo de respuesta en los primeros minutos es crítico para sobrevivir sin secuelas graves.' },
 ]
 
 export default function Prevencion() {
@@ -53,12 +53,12 @@ export default function Prevencion() {
   }
 
   return (
-    <PageWrapper title="Prevención de Enfermedades" description="Vacunación, factores de riesgo, chequeos médicos y estrategias para prevenir enfermedades crónicas.">
+    <PageWrapper title="Emergencias" description="Servicios de emergencia en Ecuador: ECU 911, SAMU, hospitales de guardia y protocolos de primeros auxilios.">
       <SectionHero
         tag="Salud preventiva"
-        title="Prevención de enfermedades"
-        description="La mejor medicina es la que se anticipa. Descubre cómo los hábitos preventivos y los controles periódicos pueden proteger tu salud a largo plazo."
-        icon="🛡️"
+        title="Emergencias"
+        description="Información sobre el sistema de emergencias en Ecuador: cuándo llamar al 911, qué hace el SAMU, hospitales de guardia y primeros auxilios básicos."
+        icon="🚨"
         gradient="teal"
       />
 

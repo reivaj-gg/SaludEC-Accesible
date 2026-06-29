@@ -12,25 +12,25 @@ import './ActividadFisica.css'
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
-  { label: 'Principios', valor: 'principios' },
-  { label: 'Por grupos', valor: 'grupos' },
-  { label: 'Prevención', valor: 'prevencion' },
+  { label: 'Esquema infantil', valor: 'infantil' },
+  { label: 'Adultos', valor: 'adultos' },
+  { label: 'Campaña MSP', valor: 'campanas' },
 ]
 
 const BENEFICIOS = [
-  { icon: '❤️', title: 'Salud cardiovascular', desc: 'Reduce el riesgo de enfermedades del corazón hasta en un 35%.' },
-  { icon: '🧠', title: 'Salud mental', desc: 'Libera endorfinas que mejoran el estado de ánimo y reducen el estrés.' },
-  { icon: '💪', title: 'Fuerza muscular', desc: 'Mantiene la masa muscular y mejora la postura y la movilidad.' },
-  { icon: '😴', title: 'Mejor sueño', desc: 'La actividad física regular favorece un sueño más profundo y reparador.' },
-  { icon: '⚡', title: 'Más energía', desc: 'Aumenta los niveles de energía y reduce la fatiga crónica.' },
-  { icon: '🛡️', title: 'Sistema inmune', desc: 'Fortalece las defensas del organismo frente a enfermedades.' },
+  { icon: '🛡️', title: 'Protección individual', desc: 'Las vacunas entrenan al sistema inmune para combatir enfermedades infecciosas.' },
+  { icon: '👨‍👩‍👧‍👦', title: 'Inmunidad de rebaño', desc: 'Al vacunarse, protege también a quienes no pueden recibir vacunas por edad o condición médica.' },
+  { icon: '🦠', title: 'Control de epidemias', desc: 'La vacunación masiva ha erradicado la viruela y eliminado la polio en Ecuador.' },
+  { icon: '💰', title: 'Gratuitas en el MSP', desc: 'El esquema nacional de vacunación es completamente gratuito en todos los centros del MSP.' },
+  { icon: '📋', title: 'Carnet de vacunas', desc: 'El carnet de vacunación es un documento oficial que debes conservar toda la vida.' },
+  { icon: '🌍', title: 'Reconocidas internacionalmente', desc: 'Las vacunas del MSP son reconocidas por organismos internacionales para viajes y trámites.' },
 ]
 
 const FAQS = [
-  { id: 'af1', question: '¿Cuánto ejercicio debo hacer a la semana?', answer: 'La OMS recomienda al menos 150–300 minutos de actividad aeróbica moderada o 75–150 minutos de actividad vigorosa por semana para adultos, más ejercicios de fortalecimiento muscular 2 días a la semana.' },
-  { id: 'af2', question: '¿Puedo ejercitarme si tengo problemas de salud?', answer: 'Sí, con la orientación adecuada. Consulta con tu médico antes de iniciar cualquier programa de ejercicio si tienes condiciones crónicas como hipertensión, diabetes o problemas articulares.' },
-  { id: 'af3', question: '¿Es mejor ejercitarse en ayunas?', answer: 'No existe una respuesta única. Depende del tipo de ejercicio y de cada persona. Para actividades de baja-media intensidad, el ejercicio en ayunas puede ser bien tolerado. Para entrenamientos intensos, es recomendable comer algo ligero 1-2 horas antes.' },
-  { id: 'af4', question: '¿Cuánto tiempo debe durar el calentamiento?', answer: 'Un calentamiento adecuado dura entre 5 y 10 minutos e incluye movilidad articular y ejercicio aeróbico suave. Es fundamental para prevenir lesiones y preparar el cuerpo para el esfuerzo.' },
+  { id: 'vac1', question: '¿Dónde me puedo vacunar gratis en Ecuador?', answer: 'En cualquier centro de salud del MSP a nivel nacional. No necesitas turno previo para la mayoría de vacunas del esquema regular. También en vacunatorios del IESS si eres afiliado.' },
+  { id: 'vac2', question: '¿Qué vacunas necesita un recién nacido?', answer: 'Al nacer: BCG (tuberculosis) y Hepatitis B. Al mes: Hepatitis B. A los 2, 4 y 6 meses: Pentavalente, Polio, Rotavirus yNeumococo. Consulta el esquema completo en el MSP o en el carnet de salud infantil.' },
+  { id: 'vac3', question: '¿Los adultos también necesitan vacunarse?', answer: 'Sí. Los adultos deben mantener actualizada la vacuna antitetánica (cada 10 años), influenza anual, y según su situación: hepatitis B, neumococo (mayores de 65 años) y otras recomendadas por el MSP.' },
+  { id: 'vac4', question: '¿Son seguras las vacunas del MSP?', answer: 'Sí. Todas las vacunas del esquema nacional pasan por rigurosos controles de calidad internacionales (OPS/OMS) antes de ser aprobadas. Los efectos secundarios leves (dolor local, fiebre baja) son normales y temporales.' },
 ]
 
 export default function ActividadFisica() {
@@ -55,12 +55,12 @@ export default function ActividadFisica() {
   }
 
   return (
-    <PageWrapper title="Actividad Física" description="Rutinas de ejercicio, estiramientos y consejos de actividad física para todos los niveles y edades.">
+    <PageWrapper title="Vacunación" description="Esquema nacional de vacunación del MSP en Ecuador: vacunas gratuitas, calendario infantil y programas para adultos.">
       <SectionHero
         tag="Movimiento y bienestar"
-        title="Actividad Física"
-        description="Rutinas adaptadas a tu nivel, estiramientos, ejercicios de oficina y todo lo que necesitas para mantenerte activo."
-        icon="🏃"
+        title="Vacunación"
+        description="Esquema nacional de vacunación del MSP: vacunas gratuitas para niños, niñas, adolescentes y adultos en todo Ecuador."
+        icon="💉"
         gradient="orange"
       />
 

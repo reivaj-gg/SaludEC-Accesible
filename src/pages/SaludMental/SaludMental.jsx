@@ -56,11 +56,11 @@ export default function SaludMental() {
   }
 
   return (
-    <PageWrapper title="Salud Mental" description="Recursos sobre bienestar emocional, manejo del estrés, ansiedad, depresión y técnicas de mindfulness.">
+    <PageWrapper title="Salud Mental" description="Servicios públicos de salud mental en Ecuador: centros de atención psicológica, líneas de crisis y recursos de apoyo emocional.">
       <SectionHero
         tag="Bienestar emocional"
         title="Salud Mental"
-        description="Tu bienestar emocional importa. Encuentra recursos, técnicas y guías para cuidar tu salud mental con el mismo rigor que tu salud física."
+        description="Servicios públicos de salud mental en Ecuador: centros de atención del MSP e IESS, líneas de crisis disponibles 24/7 y recursos de apoyo."
         icon="🧠"
         gradient="purple"
       />

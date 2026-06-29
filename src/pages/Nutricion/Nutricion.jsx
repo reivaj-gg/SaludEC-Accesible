@@ -16,16 +16,16 @@ import './Nutricion.css'
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
-  { label: 'Conceptos', valor: 'conceptos' },
-  { label: 'Hábitos', valor: 'habitos' },
-  { label: 'Dietas', valor: 'dietas' },
+  { label: 'Consultas', valor: 'consultas' },
+  { label: 'Centros MSP', valor: 'centros-msp' },
+  { label: 'IESS', valor: 'iess' },
 ]
 
 const FAQS_ESTATICAS = [
-  { id: 'f1', question: '¿Cuántas porciones de frutas y verduras debo comer al día?', answer: 'La OMS recomienda consumir al menos 400 g (cinco porciones) de frutas y hortalizas al día, excluyendo las papas, los camotes y otras raíces feculentas.' },
-  { id: 'f2', question: '¿Es necesario tomar suplementos vitamínicos?', answer: 'En general, una dieta equilibrada y variada proporciona todos los nutrientes necesarios. Los suplementos se recomiendan en casos específicos como embarazo, déficit comprobado o dietas restrictivas.' },
-  { id: 'f3', question: '¿Cuánta agua debo tomar al día?', answer: 'Para adultos sanos se recomiendan aproximadamente 2 litros de agua al día. Esto varía según el peso, la actividad física, el clima y el estado de salud individual.' },
-  { id: 'f4', question: '¿Qué es el índice de masa corporal (IMC)?', answer: 'El IMC relaciona el peso y la talla para clasificar el estado nutricional. Se calcula dividiendo el peso en kg entre la talla en metros al cuadrado. Es una referencia orientativa, no un diagnóstico clínico.' },
+  { id: 'f1', question: '¿Cómo saco un turno en un centro de salud del MSP?', answer: 'Puedes solicitar turno de forma presencial en el centro de salud más cercano, por llamada al 171 (línea del MSP) o en algunos casos a través de la aplicación Salud en Línea del Ministerio de Salud Pública del Ecuador.' },
+  { id: 'f2', question: '¿Qué servicios ofrece el primer nivel de atención?', answer: 'El primer nivel incluye consulta médica general, control prenatal, vacunación, salud bucal, medicina preventiva, enfermería y farmacia básica. Es la puerta de entrada al sistema de salud pública.' },
+  { id: 'f3', question: '¿Necesito cédula para atenderme en el MSP?', answer: 'No. El MSP atiende a toda persona que requiera atención, independientemente de si tiene cédula ecuatoriana. Los extranjeros en situación irregular también tienen derecho a atención en emergencias y salud materno-infantil.' },
+  { id: 'f4', question: '¿Cuál es la diferencia entre el MSP y el IESS?', answer: 'El MSP (Ministerio de Salud Pública) atiende a toda la ciudadanía de forma gratuita. El IESS (Instituto Ecuatoriano de Seguridad Social) atiende a trabajadores afiliados y sus dependientes. Ambos forman parte de la red pública integral de salud (RPIS).' },
 ]
 
 export default function Nutricion() {
@@ -63,12 +63,12 @@ export default function Nutricion() {
   }
 
   return (
-    <PageWrapper title="Nutrición" description="Guías de alimentación saludable, recetas, vitaminas, hidratación y calculadora de IMC.">
+    <PageWrapper title="Atención Primaria" description="Servicios de atención primaria de salud en Ecuador: centros del MSP, IESS, cómo sacar turnos y qué incluye el primer nivel de atención.">
       <SectionHero
         tag="Salud preventiva"
-        title="Nutrición saludable"
-        description="Información confiable sobre alimentación equilibrada, vitaminas esenciales, hidratación y hábitos nutritivos para toda la familia."
-        icon="🥗"
+        title="Atención Primaria de Salud"
+        description="Conoce los servicios del primer nivel de atención en Ecuador: centros del MSP, unidades del IESS, cómo acceder, turnos y más."
+        icon="🏥"
         gradient="green"
       />
 

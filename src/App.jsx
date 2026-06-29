@@ -76,13 +76,13 @@ export default function App() {
                 <Routes>
                   <Route path="/"                       element={<Home />} />
                   <Route path={ROUTES.NUTRICION}        element={<Nutricion />} />
-                  <Route path="/nutricion/:slug"        element={<Nutricion />} />
+                  <Route path="/atencion-primaria/:slug" element={<Nutricion />} />
                   <Route path={ROUTES.ACTIVIDAD_FISICA} element={<ActividadFisica />} />
-                  <Route path="/actividad-fisica/:slug" element={<ActividadFisica />} />
+                  <Route path="/vacunacion/:slug"        element={<ActividadFisica />} />
                   <Route path={ROUTES.SALUD_MENTAL}     element={<SaludMental />} />
                   <Route path="/salud-mental/:slug"     element={<SaludMental />} />
                   <Route path={ROUTES.PREVENCION}       element={<Prevencion />} />
-                  <Route path="/prevencion/:slug"       element={<Prevencion />} />
+                  <Route path="/emergencias/:slug"      element={<Prevencion />} />
                   <Route path={ROUTES.BIBLIOTECA}       element={<Biblioteca />} />
                   <Route path={ROUTES.NOTICIAS}         element={<Noticias />} />
                   <Route path="/noticias/:id"           element={<NoticiasDetalle />} />

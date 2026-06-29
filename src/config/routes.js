@@ -1,13 +1,13 @@
 export const ROUTES = {
   HOME: '/',
-  NUTRICION: '/nutricion',
-  NUTRICION_ARTICULO: '/nutricion/:slug',
-  ACTIVIDAD_FISICA: '/actividad-fisica',
-  ACTIVIDAD_FISICA_ARTICULO: '/actividad-fisica/:slug',
+  NUTRICION: '/atencion-primaria',
+  NUTRICION_ARTICULO: '/atencion-primaria/:slug',
+  ACTIVIDAD_FISICA: '/vacunacion',
+  ACTIVIDAD_FISICA_ARTICULO: '/vacunacion/:slug',
   SALUD_MENTAL: '/salud-mental',
   SALUD_MENTAL_ARTICULO: '/salud-mental/:slug',
-  PREVENCION: '/prevencion',
-  PREVENCION_ARTICULO: '/prevencion/:slug',
+  PREVENCION: '/emergencias',
+  PREVENCION_ARTICULO: '/emergencias/:slug',
   BIBLIOTECA: '/biblioteca',
   NOTICIAS: '/noticias',
   NOTICIA: '/noticias/:id',
@@ -23,11 +23,11 @@ export const ROUTES = {
 }
 
 export const NAV_ITEMS = [
-  { label: 'Inicio', path: ROUTES.HOME },
-  { label: 'Nutrición', path: ROUTES.NUTRICION },
-  { label: 'Actividad Física', path: ROUTES.ACTIVIDAD_FISICA },
-  { label: 'Salud Mental', path: ROUTES.SALUD_MENTAL },
-  { label: 'Prevención', path: ROUTES.PREVENCION },
-  { label: 'Biblioteca', path: ROUTES.BIBLIOTECA },
-  { label: 'Noticias', path: ROUTES.NOTICIAS },
+  { label: 'Inicio',            path: ROUTES.HOME },
+  { label: 'Atención Primaria', path: ROUTES.NUTRICION },
+  { label: 'Vacunación',        path: ROUTES.ACTIVIDAD_FISICA },
+  { label: 'Salud Mental',      path: ROUTES.SALUD_MENTAL },
+  { label: 'Emergencias',       path: ROUTES.PREVENCION },
+  { label: 'Biblioteca',        path: ROUTES.BIBLIOTECA },
+  { label: 'Noticias',          path: ROUTES.NOTICIAS },
 ]
