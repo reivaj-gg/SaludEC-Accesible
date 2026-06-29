@@ -25,6 +25,7 @@ const AdminLogin      = lazy(() => import('@pages/Admin/Login/Login'))
 const AdminDashboard  = lazy(() => import('@pages/Admin/Dashboard/Dashboard'))
 const AdminArticulos  = lazy(() => import('@pages/Admin/Articulos/Articulos'))
 const AdminMensajes   = lazy(() => import('@pages/Admin/Mensajes/Mensajes'))
+const AdminNoticias   = lazy(() => import('@pages/Admin/Noticias/Noticias'))
 
 function PageLoader() {
   return (
@@ -56,6 +57,7 @@ export default function App() {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="articulos" element={<AdminArticulos />} />
+          <Route path="noticias" element={<AdminNoticias />} />
           <Route path="mensajes" element={<AdminMensajes />} />
         </Route>
 
