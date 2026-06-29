@@ -23,17 +23,12 @@ function HeroCube({ noticias }) {
     lastX: 0,  lastY: 0,
     rotX: -20, rotY: 0,
   })
-  const reducedMotion = useRef(
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  )
-
   useEffect(() => {
     const d = drag.current
     const SPEED = 360 / (20 * 60)   // una vuelta cada ~20 s a 60 fps
 
     const tick = () => {
-      if (!d.active && !reducedMotion.current) d.rotY += SPEED
+      if (!d.active) d.rotY += SPEED
       if (sceneRef.current) {
         sceneRef.current.style.transform =
           `rotateX(${d.rotX}deg) rotateY(${d.rotY}deg)`
