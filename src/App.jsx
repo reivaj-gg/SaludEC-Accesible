@@ -6,6 +6,7 @@ import Footer from '@components/layout/Footer/Footer'
 import Spinner from '@components/ui/Spinner/Spinner'
 import ProtectedRoute from '@components/layout/ProtectedRoute/ProtectedRoute'
 import AdminShell from '@components/layout/AdminShell/AdminShell'
+import BackToTop from '@components/ui/BackToTop/BackToTop'
 import { ROUTES } from '@config/routes'
 
 // Páginas públicas
@@ -26,6 +27,7 @@ const AdminDashboard  = lazy(() => import('@pages/Admin/Dashboard/Dashboard'))
 const AdminArticulos  = lazy(() => import('@pages/Admin/Articulos/Articulos'))
 const AdminMensajes   = lazy(() => import('@pages/Admin/Mensajes/Mensajes'))
 const AdminNoticias     = lazy(() => import('@pages/Admin/Noticias/Noticias'))
+const AdminRecursos     = lazy(() => import('@pages/Admin/Recursos/Recursos'))
 const NoticiasDetalle   = lazy(() => import('@pages/NoticiasDetalle/NoticiasDetalle'))
 
 function PageLoader() {
@@ -59,6 +61,7 @@ export default function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="articulos" element={<AdminArticulos />} />
           <Route path="noticias" element={<AdminNoticias />} />
+          <Route path="recursos" element={<AdminRecursos />} />
           <Route path="mensajes" element={<AdminMensajes />} />
         </Route>
 
@@ -89,6 +92,7 @@ export default function App() {
                 </Routes>
               </Suspense>
               <Footer />
+              <BackToTop />
             </>
           }
         />

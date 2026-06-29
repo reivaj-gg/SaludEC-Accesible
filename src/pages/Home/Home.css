@@ -297,6 +297,124 @@
   transform: translateX(4px);
 }
 
+/* ── Hero trust badges ── */
+.hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.5);
+}
+
+.hero__trust span::before { margin-right: 4px; }
+
+/* ── 3er card float ── */
+.hero__card-float--3 {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  animation-delay: 0.9s;
+}
+
+/* ── Stats desc ── */
+.home-stats__desc {
+  font-size: var(--text-xs);
+  color: var(--color-blue-400);
+  max-width: none;
+}
+
+/* ── Por qué VitaPrevent ── */
+.section--alt {
+  background: var(--color-bg-subtle);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-5);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: box-shadow var(--duration-base), transform var(--duration-base);
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card:hover { transform: none; }
+}
+
+.feature-card__icon { font-size: 2rem; }
+.feature-card__title {
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+}
+.feature-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: none;
+}
+
+/* ── Sección header con row ── */
+.section__header--row {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: left;
+  gap: var(--space-4);
+}
+
+.section__link {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.section__link:hover { text-decoration: underline; }
+.section__link:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Empty noticias ── */
+.home-news-empty {
+  text-align: center;
+  padding: var(--space-12) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-2xl);
+  border: 1px dashed var(--color-border);
+}
+
+.home-news-empty p {
+  color: var(--color-text-muted);
+  max-width: 44ch;
+}
+
 /* ── CTAs ── */
 .home-cta-row {
   display: flex;
