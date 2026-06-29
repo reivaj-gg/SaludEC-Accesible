@@ -90,11 +90,15 @@ a:not([class]):hover {
   color: var(--color-text-muted);
   margin: var(--space-8) 0;
 }
-.prose table { border-collapse: collapse; width: 100%; margin-bottom: var(--space-8); font-size: var(--text-base); }
-.prose thead { background: var(--color-gray-100); }
-.prose th { text-align: left; font-weight: var(--font-semibold); padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); color: var(--color-text); }
-.prose td { padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); vertical-align: top; }
-.prose tr:nth-child(even) td { background: var(--color-surface); }
+.prose table { border-collapse: collapse; width: 100%; margin-bottom: var(--space-8); font-size: var(--text-base); overflow-x: auto; display: block; }
+.prose thead { background: var(--color-blue-700); }
+.prose th { text-align: left; font-weight: var(--font-semibold); padding: var(--space-3) var(--space-4); border: 1px solid var(--color-blue-600); color: #ffffff; }
+.prose td { padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); vertical-align: top; color: var(--color-text); }
+.prose tr:nth-child(even) td { background: var(--color-bg-subtle); }
+@media (prefers-color-scheme: dark) {
+  .prose thead { background: var(--color-blue-800, #0d47a1); }
+  .prose th { border-color: var(--color-blue-700); }
+}
 .prose img { max-width: 100%; border-radius: var(--radius-lg); height: auto; }
 
 /* ── Sección base ── */

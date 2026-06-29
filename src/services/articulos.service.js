@@ -14,7 +14,10 @@ export async function getArticulosByModulo(modulo, categoria = null) {
   ]
   if (categoria) constraints.splice(2, 0, where('categoria', '==', categoria))
   const snap = await getDocs(query(collection(db, 'articulos'), ...constraints))
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+  const seen = new Set()
+  return snap.docs
+    .filter((d) => { if (seen.has(d.id)) return false; seen.add(d.id); return true })
+    .map((d) => ({ id: d.id, ...d.data() }))
 }
 
 export async function getArticuloBySlug(slug) {

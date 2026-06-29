@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageWrapper from '@components/layout/PageWrapper/PageWrapper'
 import NewsCard from '@components/common/NewsCard/NewsCard'
@@ -7,128 +7,48 @@ import { ROUTES } from '@config/routes'
 import { getNoticias } from '@services/noticias.service'
 import './Home.css'
 
-function useCounter(target, duration, active) {
-  const [val, setVal] = useState(0)
-  useEffect(() => {
-    if (!active) return
-    let raf
-    const start = performance.now()
-    const tick = (now) => {
-      const t = Math.min((now - start) / duration, 1)
-      const eased = 1 - (1 - t) ** 3
-      setVal(Math.round(eased * target))
-      if (t < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, duration, active])
-  return val
-}
-
-const DASH_MODS = [
-  { icon: '🥗', label: 'Nutrición', path: ROUTES.NUTRICION },
-  { icon: '🏃', label: 'Actividad', path: ROUTES.ACTIVIDAD_FISICA },
-  { icon: '🧠', label: 'Mental', path: ROUTES.SALUD_MENTAL },
-  { icon: '🛡️', label: 'Prevención', path: ROUTES.PREVENCION },
+const CUBE_MODS = [
+  { pos: 'front',  icon: '🥗', title: 'Nutrición',       sub: 'Alimentación saludable',  path: ROUTES.NUTRICION,        bg: 'rgba(22,163,74,0.22)',   glow: '#22c55e' },
+  { pos: 'right',  icon: '🏃', title: 'Actividad Física', sub: 'Rutinas y ejercicio',     path: ROUTES.ACTIVIDAD_FISICA, bg: 'rgba(234,88,12,0.22)',   glow: '#f97316' },
+  { pos: 'back',   icon: '🧠', title: 'Salud Mental',     sub: 'Bienestar emocional',     path: ROUTES.SALUD_MENTAL,    bg: 'rgba(147,51,234,0.22)',  glow: '#a855f7' },
+  { pos: 'left',   icon: '🛡️', title: 'Prevención',       sub: 'Cuida tu salud',          path: ROUTES.PREVENCION,      bg: 'rgba(21,101,192,0.22)',  glow: '#60a5fa' },
 ]
 
-function HeroDashboard({ latestNoticia }) {
-  const [active, setActive] = useState(false)
-  const containerRef = useRef(null)
-  const cardRef = useRef(null)
+function HeroCube({ noticias }) {
+  const [paused, setPaused] = useState(false)
 
-  const artCount = useCounter(47, 1800, active)
-  const pctCount = useCounter(100, 1400, active)
+  const topFace = noticias[0]
+    ? { pos: 'top',    icon: '📰', title: noticias[0].titulo?.slice(0, 26) + (noticias[0].titulo?.length > 26 ? '…' : ''), sub: 'Última noticia',   path: `/noticias/${noticias[0].id}`, bg: 'rgba(8,145,178,0.22)',  glow: '#22d3ee' }
+    : { pos: 'top',    icon: '📋', title: 'Noticias',        sub: 'Actualidad en salud', path: ROUTES.NOTICIAS,               bg: 'rgba(8,145,178,0.22)',  glow: '#22d3ee' }
 
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setActive(true) },
-      { threshold: 0.2 }
-    )
-    if (containerRef.current) obs.observe(containerRef.current)
-    return () => obs.disconnect()
-  }, [])
+  const bottomFace = noticias[1]
+    ? { pos: 'bottom', icon: '🔔', title: noticias[1].titulo?.slice(0, 26) + (noticias[1].titulo?.length > 26 ? '…' : ''), sub: 'Noticia reciente', path: `/noticias/${noticias[1].id}`, bg: 'rgba(8,145,178,0.22)',  glow: '#22d3ee' }
+    : { pos: 'bottom', icon: '📚', title: 'Biblioteca',      sub: 'Recursos digitales',  path: ROUTES.BIBLIOTECA,             bg: 'rgba(8,145,178,0.22)',  glow: '#22d3ee' }
 
-  useEffect(() => {
-    const card = cardRef.current
-    if (!card) return
-    const move = (e) => {
-      const r = card.getBoundingClientRect()
-      const x = ((e.clientX - r.left) / r.width - 0.5) * 14
-      const y = ((e.clientY - r.top) / r.height - 0.5) * -14
-      card.style.transform = `perspective(900px) rotateY(${x}deg) rotateX(${y}deg)`
-    }
-    const leave = () => { card.style.transform = '' }
-    card.addEventListener('mousemove', move)
-    card.addEventListener('mouseleave', leave)
-    return () => { card.removeEventListener('mousemove', move); card.removeEventListener('mouseleave', leave) }
-  }, [])
+  const faces = [...CUBE_MODS, topFace, bottomFace]
 
   return (
-    <div className="hero-dash" ref={containerRef}>
-      {latestNoticia && (
-        <Link to={`/noticias/${latestNoticia.id}`} className="hero-dash__badge" tabIndex="-1">
-          <span className="hero-dash__badge-dot" />
-          <span className="hero-dash__badge-label">Última noticia</span>
-          <span className="hero-dash__badge-title">
-            {latestNoticia.titulo?.slice(0, 36)}{latestNoticia.titulo?.length > 36 ? '…' : ''}
-          </span>
-        </Link>
-      )}
-
-      <div className="hero-dash__card" ref={cardRef}>
-        <div className="hero-dash__card-header">
-          <div className="hero-dash__brand">
-            <span className="hero-dash__brand-icon" aria-hidden="true">+</span>
-            <span className="hero-dash__brand-name">VitaPrevent</span>
-          </div>
-          <span className="hero-dash__live-badge">
-            <span className="hero-dash__live-dot" />
-            EN VIVO
-          </span>
-        </div>
-        <p className="hero-dash__card-subtitle">Panel de bienestar · Ecuador</p>
-
-        <div className="hero-dash__stats">
-          <div className="hero-dash__stat">
-            <span className="hero-dash__stat-num">{artCount}<sup>+</sup></span>
-            <span className="hero-dash__stat-lbl">Artículos</span>
-            <div className="hero-dash__bar">
-              <div className="hero-dash__bar-fill hero-dash__bar-fill--blue" style={{ width: active ? '82%' : '0%' }} />
-            </div>
-          </div>
-          <div className="hero-dash__stat">
-            <span className="hero-dash__stat-num">4</span>
-            <span className="hero-dash__stat-lbl">Módulos</span>
-            <div className="hero-dash__bar">
-              <div className="hero-dash__bar-fill hero-dash__bar-fill--teal" style={{ width: active ? '100%' : '0%' }} />
-            </div>
-          </div>
-          <div className="hero-dash__stat">
-            <span className="hero-dash__stat-num">{pctCount}<sup>%</sup></span>
-            <span className="hero-dash__stat-lbl">Gratuito</span>
-            <div className="hero-dash__bar">
-              <div className="hero-dash__bar-fill hero-dash__bar-fill--green" style={{ width: active ? '100%' : '0%' }} />
-            </div>
-          </div>
-        </div>
-
-        <hr className="hero-dash__divider" />
-
-        <p className="hero-dash__access-label">Acceso rápido</p>
-        <div className="hero-dash__modules">
-          {DASH_MODS.map((m) => (
-            <Link key={m.path} to={m.path} className="hero-dash__mod" tabIndex="-1">
-              <span className="hero-dash__mod-icon" aria-hidden="true">{m.icon}</span>
-              <span className="hero-dash__mod-lbl">{m.label}</span>
-            </Link>
-          ))}
-        </div>
-
-        <Link to={ROUTES.NUTRICION} className="hero-dash__cta" tabIndex="-1">
-          Explorar todo el contenido <span aria-hidden="true">→</span>
-        </Link>
+    <div
+      className="hero-cube"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className={`hero-cube__scene${paused ? ' hero-cube__scene--paused' : ''}`}>
+        {faces.map((f) => (
+          <Link
+            key={f.pos}
+            to={f.path}
+            tabIndex="-1"
+            className={`hero-cube__face hero-cube__face--${f.pos}`}
+            style={{ '--face-bg': f.bg, '--face-glow': f.glow }}
+          >
+            <span className="hero-cube__face-icon" aria-hidden="true">{f.icon}</span>
+            <strong className="hero-cube__face-title">{f.title}</strong>
+            <span className="hero-cube__face-sub">{f.sub}</span>
+          </Link>
+        ))}
       </div>
+      <p className="hero-cube__hint">Pausa al pasar el mouse · clic para explorar</p>
     </div>
   )
 }
@@ -204,7 +124,7 @@ export default function Home() {
             <div className="hero__orb hero__orb--1" />
             <div className="hero__orb hero__orb--2" />
             <div className="hero__orb hero__orb--3" />
-            <HeroDashboard latestNoticia={noticias[0]} />
+            <HeroCube noticias={noticias} />
           </div>
         </div>
       </section>
