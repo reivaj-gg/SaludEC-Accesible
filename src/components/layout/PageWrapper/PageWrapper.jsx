@@ -6,13 +6,18 @@ import './PageWrapper.css'
 export default function PageWrapper({ children, title, description }) {
   const { pathname } = useLocation()
   const mainRef = useRef(null)
+  const isFirstRender = useRef(true)
 
-  // Actualiza el título del documento y anuncia el cambio de página
   useEffect(() => {
-    const pageTitle = title ? `${title} | VitaPrevent` : 'VitaPrevent — Tu bienestar comienza con la prevención'
+    const pageTitle = title ? `${title} | VitaPrevent` : 'VitaPrevent — Servicios públicos de salud'
     document.title = pageTitle
 
-    // Mueve el foco al main para que los lectores anuncien el nuevo contenido
+    if (isFirstRender.current) {
+      // Carga inicial: NO mover foco — Tab debe ir SkipLink → Navbar → contenido
+      isFirstRender.current = false
+      return
+    }
+    // Navegación SPA: mueve foco al main para que el lector anuncie el cambio de página
     mainRef.current?.focus()
   }, [pathname, title])
 

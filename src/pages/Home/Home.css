@@ -597,3 +597,105 @@
   /* La rotación la controla JS vía rAF — no hay animation CSS que parar aquí */
   .hero-cube { pointer-events: none; }
 }
+
+/* ── Ecuador en cifras de salud ── */
+.ec-salud__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ec-salud__card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+
+.ec-salud__card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.ec-salud__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.ec-salud__valor {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ec-salud__unidad {
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+  font-weight: 500;
+}
+
+.ec-salud__titulo {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.ec-salud__desc {
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.ec-salud__bar {
+  height: 6px;
+  background: var(--color-gray-100);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: var(--space-1);
+}
+
+.ec-salud__bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.ec-salud__fuente {
+  font-size: 11px;
+  color: var(--color-gray-400);
+  font-style: normal;
+  margin-top: var(--space-1);
+}
+
+/* Colores por módulo */
+.ec-salud__card--green .ec-salud__valor { color: var(--color-green-600, #16a34a); }
+.ec-salud__card--green .ec-salud__bar-fill { background: var(--color-green-500, #22c55e); }
+
+.ec-salud__card--blue .ec-salud__valor { color: var(--color-blue-600, #2563eb); }
+.ec-salud__card--blue .ec-salud__bar-fill { background: var(--color-blue-500, #3b82f6); }
+
+.ec-salud__card--purple .ec-salud__valor { color: var(--color-purple-600, #9333ea); }
+.ec-salud__card--purple .ec-salud__bar-fill { background: var(--color-purple-500, #a855f7); }
+
+.ec-salud__card--red .ec-salud__valor { color: var(--color-red-600, #dc2626); }
+.ec-salud__card--red .ec-salud__bar-fill { background: var(--color-red-500, #ef4444); }
+
+@media (prefers-color-scheme: dark) {
+  .ec-salud__card {
+    background: var(--color-navy-800, #1e2d3d);
+    border-color: var(--color-navy-700, #2a3f54);
+  }
+  .ec-salud__titulo { color: var(--color-gray-100); }
+  .ec-salud__desc { color: var(--color-gray-400); }
+  .ec-salud__bar { background: var(--color-navy-700, #2a3f54); }
+}

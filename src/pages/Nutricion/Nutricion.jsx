@@ -59,13 +59,13 @@ export default function Nutricion() {
   }
 
   if (slug && articuloDetalle) {
-    return <ArticleDetail articulo={articuloDetalle} volverRuta="/nutricion" volverLabel="Volver a Nutrición" />
+    return <ArticleDetail articulo={articuloDetalle} volverRuta="/atencion-primaria" volverLabel="Volver a Atención Primaria" />
   }
 
   return (
     <PageWrapper title="Atención Primaria" description="Servicios de atención primaria de salud en Ecuador: centros del MSP, IESS, cómo sacar turnos y qué incluye el primer nivel de atención.">
       <SectionHero
-        tag="Salud preventiva"
+        tag="Red pública de salud"
         title="Atención Primaria de Salud"
         description="Conoce los servicios del primer nivel de atención en Ecuador: centros del MSP, unidades del IESS, cómo acceder, turnos y más."
         icon="🏥"
@@ -91,7 +91,7 @@ export default function Nutricion() {
 
         {/* Artículos */}
         <section aria-labelledby="articulos-title" className="section--sm">
-          <h2 id="articulos-title" className="nutricion-section-title">Artículos de nutrición</h2>
+          <h2 id="articulos-title" className="nutricion-section-title">Artículos de atención primaria</h2>
           {loading ? (
             <div className="nutricion-loading"><Spinner size="lg" label="Cargando artículos…" /></div>
           ) : articulos.length > 0 ? (

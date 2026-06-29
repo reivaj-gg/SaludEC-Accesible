@@ -122,10 +122,50 @@ const MODULES = [
 ]
 
 const STATS = [
-  { value: '4', label: 'Módulos temáticos', desc: 'Nutrición, Actividad Física, Salud Mental y Prevención' },
+  { value: '4', label: 'Servicios públicos', desc: 'Atención primaria, vacunación, salud mental y emergencias' },
   { value: 'AA', label: 'Cumple WCAG 2.2', desc: 'Accesible para todas las personas' },
   { value: '100%', label: 'Gratuito', desc: 'Sin registros ni pagos requeridos' },
   { value: '24/7', label: 'Disponible', desc: 'Acceso en cualquier dispositivo' },
+]
+
+/* Datos de salud pública Ecuador — fuentes: MSP 2023, INEC 2022, IESS 2024, ECU 911 2023 */
+const EC_SALUD = [
+  {
+    valor: '3.279',
+    unidad: 'establecimientos',
+    titulo: 'Red pública de salud',
+    desc: 'Centros del MSP a nivel nacional (primer y segundo nivel)',
+    fuente: 'MSP 2023',
+    color: 'green',
+    pct: 82,
+  },
+  {
+    valor: '81%',
+    unidad: 'cobertura',
+    titulo: 'Vacunación infantil',
+    desc: 'Cobertura nacional de Pentavalente (3ra dosis) en menores de 1 año',
+    fuente: 'MSP / PAI 2023',
+    color: 'blue',
+    pct: 81,
+  },
+  {
+    valor: '4,2 M',
+    unidad: 'afiliados activos',
+    titulo: 'Cobertura IESS',
+    desc: 'Trabajadores afiliados activos con derecho a atención de salud',
+    fuente: 'IESS 2024',
+    color: 'purple',
+    pct: 58,
+  },
+  {
+    valor: '46 M+',
+    unidad: 'llamadas / año',
+    titulo: 'ECU 911',
+    desc: 'Llamadas de emergencia atendidas anualmente en todo el país',
+    fuente: 'ECU 911 2023',
+    color: 'red',
+    pct: 92,
+  },
 ]
 
 const FEATURES = [
@@ -225,6 +265,45 @@ export default function Home() {
                   <p className="module-card__desc">{mod.description}</p>
                   <span className="module-card__arrow" aria-hidden="true">→</span>
                 </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── Ecuador en cifras de salud ── */}
+      <section className="section section--alt" aria-labelledby="ec-salud-title">
+        <div className="container">
+          <header className="section__header">
+            <span className="section__tag">Datos oficiales</span>
+            <h2 id="ec-salud-title" className="section__title">Ecuador en cifras de salud</h2>
+            <p className="section__subtitle">
+              Indicadores del sistema de salud pública basados en fuentes oficiales del Estado ecuatoriano.
+            </p>
+          </header>
+          <ul className="ec-salud__grid" role="list">
+            {EC_SALUD.map((d) => (
+              <li key={d.titulo} className={`ec-salud__card ec-salud__card--${d.color}`}>
+                <div className="ec-salud__head">
+                  <span className="ec-salud__valor" aria-label={`${d.valor} ${d.unidad}`}>
+                    {d.valor}
+                  </span>
+                  <span className="ec-salud__unidad">{d.unidad}</span>
+                </div>
+                <h3 className="ec-salud__titulo">{d.titulo}</h3>
+                <p className="ec-salud__desc">{d.desc}</p>
+                {/* Barra de progreso visual */}
+                <div
+                  className="ec-salud__bar"
+                  role="img"
+                  aria-label={`Indicador: ${d.pct}%`}
+                >
+                  <div
+                    className="ec-salud__bar-fill"
+                    style={{ width: `${d.pct}%` }}
+                  />
+                </div>
+                <cite className="ec-salud__fuente">Fuente: {d.fuente}</cite>
               </li>
             ))}
           </ul>

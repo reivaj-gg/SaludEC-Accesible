@@ -49,13 +49,13 @@ export default function Prevencion() {
   }, [slug, categoria])
 
   if (slug && articulo) {
-    return <ArticleDetail articulo={articulo} volverRuta="/prevencion" volverLabel="Volver a Prevención" />
+    return <ArticleDetail articulo={articulo} volverRuta="/emergencias" volverLabel="Volver a Emergencias" />
   }
 
   return (
     <PageWrapper title="Emergencias" description="Servicios de emergencia en Ecuador: ECU 911, SAMU, hospitales de guardia y protocolos de primeros auxilios.">
       <SectionHero
-        tag="Salud preventiva"
+        tag="Servicios de emergencia"
         title="Emergencias"
         description="Información sobre el sistema de emergencias en Ecuador: cuándo llamar al 911, qué hace el SAMU, hospitales de guardia y primeros auxilios básicos."
         icon="🚨"
@@ -67,7 +67,7 @@ export default function Prevencion() {
 
         {/* Pilares */}
         <section aria-labelledby="pilares-title" className="benefits-section">
-          <h2 id="pilares-title" className="module-section-title">Pilares de la prevención</h2>
+          <h2 id="pilares-title" className="module-section-title">Sistema de emergencias de Ecuador</h2>
           <ul className="benefits-grid" role="list">
             {PILARES.map((p) => (
               <li key={p.title} className={`benefit-card info-card--${p.color}`}>

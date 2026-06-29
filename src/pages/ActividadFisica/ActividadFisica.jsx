@@ -51,13 +51,13 @@ export default function ActividadFisica() {
   }, [slug, categoria])
 
   if (slug && articulo) {
-    return <ArticleDetail articulo={articulo} volverRuta="/actividad-fisica" volverLabel="Volver a Actividad Física" />
+    return <ArticleDetail articulo={articulo} volverRuta="/vacunacion" volverLabel="Volver a Vacunación" />
   }
 
   return (
     <PageWrapper title="Vacunación" description="Esquema nacional de vacunación del MSP en Ecuador: vacunas gratuitas, calendario infantil y programas para adultos.">
       <SectionHero
-        tag="Movimiento y bienestar"
+        tag="Salud pública"
         title="Vacunación"
         description="Esquema nacional de vacunación del MSP: vacunas gratuitas para niños, niñas, adolescentes y adultos en todo Ecuador."
         icon="💉"
@@ -69,7 +69,7 @@ export default function ActividadFisica() {
 
         {/* Beneficios */}
         <section aria-labelledby="beneficios-title" className="benefits-section">
-          <h2 id="beneficios-title" className="module-section-title">Beneficios de la actividad regular</h2>
+          <h2 id="beneficios-title" className="module-section-title">¿Por qué vacunarse?</h2>
           <ul className="benefits-grid" role="list">
             {BENEFICIOS.map((b) => (
               <li key={b.title} className="benefit-card">
@@ -84,7 +84,7 @@ export default function ActividadFisica() {
         {/* Artículos */}
         <section aria-labelledby="rutinas-title">
           <div className="module-section-header">
-            <h2 id="rutinas-title" className="module-section-title">Rutinas y guías</h2>
+            <h2 id="rutinas-title" className="module-section-title">Campañas y guías</h2>
             <div className="module-filters" role="group" aria-label="Filtrar artículos por categoría">
               {CATEGORIAS.map((c) => (
                 <button key={c.label} onClick={() => setCategoria(c.valor)} className={`filter-btn ${categoria === c.valor ? 'filter-btn--active' : ''}`} aria-pressed={categoria === c.valor}>{c.label}</button>
@@ -93,7 +93,7 @@ export default function ActividadFisica() {
           </div>
 
           {loading ? (
-            <div className="module-loading"><Spinner size="lg" label="Cargando rutinas…" /></div>
+            <div className="module-loading"><Spinner size="lg" label="Cargando artículos de vacunación…" /></div>
           ) : articulos.length > 0 ? (
             <div className="cards-grid">
               {articulos.map((a) => <ArticleCard key={a.id} articulo={a} moduloBase="actividad-fisica" />)}
