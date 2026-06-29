@@ -1,0 +1,108 @@
+.contact-page {
+  padding-block: var(--space-8) var(--space-20);
+}
+
+.contact-page__header {
+  margin-bottom: var(--space-12);
+}
+
+.contact-page__title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-extrabold);
+  margin-bottom: var(--space-4);
+}
+
+.contact-page__subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 55ch;
+}
+
+.contact-page__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+@media (min-width: 900px) {
+  .contact-page__layout {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ── Formulario ── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.contact-form__required-note {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: none;
+}
+
+.contact-form__submit {
+  align-self: flex-start;
+}
+
+/* ── Éxito ── */
+.contact-success {
+  text-align: center;
+  padding: var(--space-16) var(--space-8);
+  background: var(--color-success-100);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-success-500);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.contact-success__icon {
+  font-size: 3rem;
+}
+
+.contact-success h2 {
+  color: var(--color-success-700);
+}
+
+.contact-success p {
+  color: var(--color-success-700);
+  max-width: 40ch;
+}
+
+/* ── Info lateral ── */
+.contact-page__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-info-card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+}
+
+.contact-info-card__icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.contact-info-card__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-1);
+}
+
+.contact-info-card p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: none;
+}
