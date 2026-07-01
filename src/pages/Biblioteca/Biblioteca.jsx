@@ -70,7 +70,11 @@ export default function Biblioteca() {
       <div className="biblioteca-page container">
         <Breadcrumb />
 
-        <div className="biblioteca-toolbar">
+        <a href="#biblioteca-toolbar" className="skip-link">
+          Saltar a los filtros de búsqueda
+        </a>
+
+        <div id="biblioteca-toolbar" className="biblioteca-toolbar">
           <SearchBar
             onSearch={setBusqueda}
             placeholder="Buscar en la biblioteca…"

@@ -8,7 +8,13 @@ import ArticleDetail from '@components/common/ArticleDetail/ArticleDetail'
 import Accordion from '@components/common/Accordion/Accordion'
 import Spinner from '@components/ui/Spinner/Spinner'
 import { getArticulosByModulo, getArticuloBySlug } from '@services/articulos.service'
+import ContextualHelp from '@components/common/ContextualHelp/ContextualHelp'
 import './ActividadFisica.css'
+
+const AYUDA_LINKS = [
+  { href: 'tel:171', label: 'Línea 171 del MSP', desc: 'Consultas sobre el esquema de vacunación, centros y campañas — gratuita, 24/7', tel: true },
+  { href: '/contacto', label: 'Formulario de contacto', desc: 'Envíanos tu consulta y te respondemos en breve' },
+]
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
@@ -112,6 +118,8 @@ export default function ActividadFisica() {
           <h2 id="faqs-af-title" className="module-section-title">Preguntas frecuentes</h2>
           <Accordion items={FAQS.map((f) => ({ id: f.id, question: f.question, answer: f.answer }))} allowMultiple />
         </section>
+
+        <ContextualHelp links={AYUDA_LINKS} />
       </div>
     </PageWrapper>
   )

@@ -8,7 +8,14 @@ import ArticleDetail from '@components/common/ArticleDetail/ArticleDetail'
 import Accordion from '@components/common/Accordion/Accordion'
 import Spinner from '@components/ui/Spinner/Spinner'
 import { getArticulosByModulo, getArticuloBySlug } from '@services/articulos.service'
+import ContextualHelp from '@components/common/ContextualHelp/ContextualHelp'
 import './Prevencion.css'
+
+const AYUDA_LINKS = [
+  { href: 'tel:911', label: 'ECU 911 — Emergencias', desc: 'Policía, bomberos y emergencias médicas — disponible 24/7', tel: true },
+  { href: 'tel:171', label: 'Línea 171 del MSP', desc: 'Información sobre centros hospitalarios y guardia', tel: true },
+  { href: '/contacto', label: 'Formulario de contacto', desc: 'Consultas no urgentes — te respondemos en breve' },
+]
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
@@ -108,6 +115,8 @@ export default function Prevencion() {
           <h2 id="faqs-pv-title" className="module-section-title">Preguntas frecuentes</h2>
           <Accordion items={FAQS.map((f) => ({ id: f.id, question: f.question, answer: f.answer }))} allowMultiple />
         </section>
+
+        <ContextualHelp links={AYUDA_LINKS} />
       </div>
     </PageWrapper>
   )

@@ -1,9 +1,16 @@
 import './SkipLink.css'
 
-export default function SkipLink() {
+export default function SkipLink({ extraLinks = [] }) {
   return (
-    <a href="#main-content" className="skip-link">
-      Saltar al contenido principal
-    </a>
+    <div className="skip-links">
+      <a href="#main-content" className="skip-link">
+        Saltar al contenido principal
+      </a>
+      {extraLinks.map(({ href, label }) => (
+        <a key={href} href={href} className="skip-link">
+          {label}
+        </a>
+      ))}
+    </div>
   )
 }

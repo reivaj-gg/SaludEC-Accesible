@@ -1,8 +1,14 @@
-.skip-link {
+.skip-links {
   position: fixed;
   top: var(--space-4);
   left: var(--space-4);
   z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skip-link {
   padding: var(--space-3) var(--space-6);
   background-color: var(--color-navy-900);
   color: var(--color-white);

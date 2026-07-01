@@ -12,7 +12,13 @@ import Button from '@components/ui/Button/Button'
 import Badge from '@components/ui/Badge/Badge'
 import { getArticulosByModulo, getArticuloBySlug } from '@services/articulos.service'
 import { calcularIMC, interpretarIMC, validateIMC } from '@utils/validators'
+import ContextualHelp from '@components/common/ContextualHelp/ContextualHelp'
 import './Nutricion.css'
+
+const AYUDA_LINKS = [
+  { href: 'tel:171', label: 'Línea 171 del MSP', desc: 'Información sobre centros de salud, citas y servicios — gratuita, 24/7', tel: true },
+  { href: '/contacto', label: 'Formulario de contacto', desc: 'Envíanos tu consulta y te respondemos en breve' },
+]
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
@@ -193,6 +199,8 @@ export default function Nutricion() {
             allowMultiple
           />
         </section>
+
+        <ContextualHelp links={AYUDA_LINKS} />
       </div>
     </PageWrapper>
   )

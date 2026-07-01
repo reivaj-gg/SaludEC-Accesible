@@ -8,7 +8,14 @@ import ArticleDetail from '@components/common/ArticleDetail/ArticleDetail'
 import Accordion from '@components/common/Accordion/Accordion'
 import Spinner from '@components/ui/Spinner/Spinner'
 import { getArticulosByModulo, getArticuloBySlug } from '@services/articulos.service'
+import ContextualHelp from '@components/common/ContextualHelp/ContextualHelp'
 import './SaludMental.css'
+
+const AYUDA_LINKS = [
+  { href: 'tel:182', label: 'Línea 182 — Salud Mental MSP', desc: 'Atención en crisis emocional, apoyo psicológico gratuito — disponible 24/7', tel: true },
+  { href: 'tel:171', label: 'Línea 171 del MSP', desc: 'Información sobre centros de salud mental y citas', tel: true },
+  { href: '/contacto', label: 'Formulario de contacto', desc: 'Envíanos tu consulta y te respondemos en breve' },
+]
 
 const CATEGORIAS = [
   { label: 'Todos', valor: null },
@@ -111,6 +118,8 @@ export default function SaludMental() {
           <h2 id="faqs-sm-title" className="module-section-title">Preguntas frecuentes</h2>
           <Accordion items={FAQS.map((f) => ({ id: f.id, question: f.question, answer: f.answer }))} allowMultiple />
         </section>
+
+        <ContextualHelp links={AYUDA_LINKS} />
       </div>
     </PageWrapper>
   )
