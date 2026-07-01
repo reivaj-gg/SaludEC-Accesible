@@ -257,6 +257,15 @@ function getThumbRecurso(titulo = '', tipo = '') {
   return { url: `${BASE}photo-1576091160550-2173dba999ef?w=400&auto=format&fit=crop`, alt: 'Recurso de salud pública' }
 }
 
+// IDs de Unsplash que sabemos que muestran contenido incorrecto (p.ej. salmón/pescador)
+const BAD_PHOTO_IDS = [
+  'photo-1476480862126-209bfaa8edc8',  // pescador con salmón — usado por error para "caminar"
+  'photo-1497032628192-86f99bcd76bc',  // imagen incorrecta
+]
+function esFotoMala(url = '') {
+  return BAD_PHOTO_IDS.some((id) => url.includes(id))
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // FUNCIÓN PRINCIPAL DE LIMPIEZA
 // ─────────────────────────────────────────────────────────────────────────────
@@ -282,8 +291,9 @@ export async function ejecutarCleanup(onProgress) {
   for (const d of artDocs) {
     const data = d.data()
     const slug = data.slug || ''
-    // Solo se considera que ya tiene imagen si tiene imagen.url (lo que ArticleCard usa)
-    const tieneImagen = !!(data.imagen?.url)
+    const imgActual = data.imagen?.url || ''
+    // Necesita corrección si: no tiene imagen.url, O tiene una foto conocida como incorrecta
+    const necesitaImagen = !imgActual || esFotoMala(imgActual)
 
     // Detectar duplicado por slug
     if (slug && seenSlugs[slug]) {
@@ -299,18 +309,15 @@ export async function ejecutarCleanup(onProgress) {
     }
     if (slug) seenSlugs[slug] = d.id
 
-    // Agregar o corregir imagen (siempre escribir {imagen:{url,alt}} que es lo que ArticleCard lee)
-    if (!tieneImagen) {
-      // Si ya tiene imagenUrl plano, lo reutilizamos; si no, asignamos uno temático
-      const img = data.imagenUrl
-        ? { url: data.imagenUrl, alt: data.imagenAlt || data.titulo || '' }
-        : getImgArticulo(data.titulo, data.modulo)
+    // Agregar o reemplazar imagen — siempre detectar por título para evitar fotos incorrectas
+    if (necesitaImagen) {
+      const img = getImgArticulo(data.titulo, data.modulo)
       try {
         await updateDoc(doc(db, 'articulos', d.id), {
           imagen: { url: img.url, alt: img.alt },
           actualizadoEn: serverTimestamp(),
         })
-        log(`🖼 Imagen corregida: "${(data.titulo || '').slice(0, 50)}"`)
+        log(`🖼 Imagen ${esFotoMala(imgActual) ? 'reemplazada' : 'añadida'}: "${(data.titulo || '').slice(0, 50)}"`)
         actualizados++
       } catch (e) {
         log(`⚠ Error actualizando ${d.id}: ${e.message}`)
