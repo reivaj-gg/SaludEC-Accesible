@@ -20,6 +20,7 @@ export default function ArticleCard({ articulo, moduloBase }) {
           <img
             src={imagen.url}
             alt={imagen.alt || titulo}
+            title={imagen.alt || titulo}
             className="article-card__img"
             loading="lazy"
             width={400}

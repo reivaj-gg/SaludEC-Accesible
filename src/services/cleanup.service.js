@@ -49,7 +49,7 @@ const IMG = {
   fuerza_mayor:   ['photo-1574680096145-d05b474e2155', 'Adulto mayor haciendo ejercicio de fuerza con pesas'],
   fuerza:         ['photo-1581009146145-b5ef050c2e1e', 'Persona en gimnasio realizando press de banca'],
   sedentarismo:   ['photo-1498049794561-7780e7231661', 'Persona sentada frente al computador en postura sedentaria'],
-  fitt:           ['photo-1517836357463-d25dfeac3438', 'Planificación de rutina de ejercicio con objetivos'],
+  fitt:           ['photo-1581009146145-b5ef050c2e1e', 'Persona en gimnasio siguiendo el principio FITT para estructurar su entrenamiento'],
   ejercicio_diab: ['photo-1571019613454-1cb2f99b2d8b', 'Persona controlando glucosa antes de hacer ejercicio'],
   principiante:   ['photo-1534438327276-14e5300c3a48', 'Persona ejercitándose en casa con ropa deportiva'],
   // Salud mental
@@ -65,11 +65,12 @@ const IMG = {
   // Prevención / Emergencias
   hipertension:   ['photo-1559757148-5c350d0d3c56', 'Médico midiendo presión arterial con tensiómetro'],
   diabetes_prev:  ['photo-1579154204601-01588f351e67', 'Glucómetro y control de azúcar en sangre'],
-  vacunacion:     ['photo-1605289982774-9a6fef564df8', 'Profesional aplicando vacuna a paciente adulto'],
+  vacunacion:     ['photo-1584516150909-c43483ee7932', 'Enfermera aplicando vacuna a paciente en centro de salud público'],
+  vacunacion_covid:['photo-1605289982774-9a6fef564df8', 'Frascos de vacunas del programa nacional de inmunización'],
   examen_prev:    ['photo-1576091160550-2173dba999ef', 'Médico con estetoscopio en consulta de chequeo preventivo'],
   tabaquismo:     ['photo-1559757175-0eb30cd8c063', 'Cigarro apagado — campaña de prevención del tabaquismo'],
   cancer_piel:    ['photo-1594882645126-14ac19a234b5', 'Aplicación de protector solar en la piel'],
-  rcp:            ['photo-1559757175-0eb30cd8c063', 'Maniobra de reanimación cardiopulmonar básica'],
+  rcp:            ['photo-1559757175-5700dde675bc', 'Maniobra de reanimación cardiopulmonar básica — primeros auxilios'],
   ecu911:         ['photo-1587745416684-47953f16f02f', 'Central de operaciones del sistema ECU 911'],
 }
 
@@ -158,8 +159,13 @@ function getImgArticulo(titulo = '', modulo = '') {
     return img('hipertension')
   if (t.includes('diabetes') && (t.includes('prevenci') || t.includes('tipo 2')))
     return img('diabetes_prev')
-  if (t.includes('vacuna') || t.includes('inmuniz') || t.includes('pai') || t.includes('calendario'))
-    return img('vacunacion')
+  if (t.includes('vacuna') || t.includes('inmuniz') || t.includes('pai') || t.includes('esquema')) {
+    // Vacunación infantil/PAI → imagen de enfermera vacunando niño
+    if (t.includes('infantil') || t.includes('niño') || t.includes('nino') || t.includes('pai') || t.includes('esquema'))
+      return img('vacunacion')
+    // Vacunación adultos/general → imagen más genérica de vacunas (COVID vials)
+    return img('vacunacion_covid')
+  }
   if (t.includes('examen') || t.includes('chequeo') || t.includes('preventivo'))
     return img('examen_prev')
   if (t.includes('fumar') || t.includes('tabaqui') || t.includes('cigarr'))
@@ -257,10 +263,11 @@ function getThumbRecurso(titulo = '', tipo = '') {
   return { url: `${BASE}photo-1576091160550-2173dba999ef?w=400&auto=format&fit=crop`, alt: 'Recurso de salud pública' }
 }
 
-// IDs de Unsplash que sabemos que muestran contenido incorrecto (p.ej. salmón/pescador)
+// IDs de Unsplash que muestran contenido incorrecto — se reemplazan siempre
 const BAD_PHOTO_IDS = [
-  'photo-1476480862126-209bfaa8edc8',  // pescador con salmón — usado por error para "caminar"
-  'photo-1497032628192-86f99bcd76bc',  // imagen incorrecta
+  'photo-1476480862126-209bfaa8edc8',  // pescador con salmón (caminar)
+  'photo-1497032628192-86f99bcd76bc',  // pescador con salmón (sedentarismo antiguo)
+  'photo-1517836357463-d25dfeac3438',  // pescador con salmón (FITT antiguo)
 ]
 function esFotoMala(url = '') {
   return BAD_PHOTO_IDS.some((id) => url.includes(id))
