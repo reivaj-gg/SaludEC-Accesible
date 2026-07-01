@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { collection, getCountFromServer } from 'firebase/firestore'
 import { db } from '@config/firebase'
 import StatisticCard from '@components/common/StatisticCard/StatisticCard'
 import Spinner from '@components/ui/Spinner/Spinner'
+import { ejecutarSeed } from '@services/seed.service'
 import './Dashboard.css'
 
 const ACCIONES = [
@@ -14,6 +15,25 @@ const ACCIONES = [
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null)
+  const [seedState, setSeedState] = useState('idle') // idle | running | done | error
+  const [seedLog, setSeedLog] = useState([])
+  const logRef = useRef(null)
+
+  const handleSeed = async () => {
+    if (seedState === 'running') return
+    setSeedState('running')
+    setSeedLog([])
+    try {
+      await ejecutarSeed((msg) => {
+        setSeedLog((prev) => [...prev, msg])
+        setTimeout(() => logRef.current?.scrollTo(0, logRef.current.scrollHeight), 50)
+      })
+      setSeedState('done')
+    } catch (e) {
+      setSeedLog((prev) => [...prev, `Error: ${e.message}`])
+      setSeedState('error')
+    }
+  }
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -74,6 +94,49 @@ export default function AdminDashboard() {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="seed-title" className="seed-section">
+        <h2 id="seed-title" className="dashboard-section-title">Contenido de ejemplo</h2>
+        <div className="seed-card">
+          <div className="seed-card__header">
+            <span className="seed-card__icon" aria-hidden="true">🌱</span>
+            <div>
+              <strong className="seed-card__label">Cargar contenido inicial</strong>
+              <p className="seed-card__desc">
+                Inserta artículos, noticias y recursos de biblioteca con contenido real sobre servicios públicos de salud del Ecuador (MSP, IESS, ECU 911). Los documentos ya existentes se omiten automáticamente.
+              </p>
+            </div>
+          </div>
+
+          <button
+            className={`seed-btn seed-btn--${seedState}`}
+            onClick={handleSeed}
+            disabled={seedState === 'running'}
+            aria-busy={seedState === 'running'}
+          >
+            {seedState === 'running' && <Spinner size="sm" label="" />}
+            {seedState === 'idle' && 'Cargar contenido de ejemplo'}
+            {seedState === 'running' && 'Cargando…'}
+            {seedState === 'done' && 'Contenido cargado correctamente'}
+            {seedState === 'error' && 'Error — reintentar'}
+          </button>
+
+          {seedLog.length > 0 && (
+            <div
+              ref={logRef}
+              className="seed-log"
+              role="log"
+              aria-label="Registro de carga de contenido"
+              aria-live="polite"
+              tabIndex={0}
+            >
+              {seedLog.map((line, i) => (
+                <p key={i} className="seed-log__line">{line}</p>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>
