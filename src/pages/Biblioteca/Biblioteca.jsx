@@ -108,14 +108,23 @@ export default function Biblioteca() {
           </div>
         </div>
 
-        <section aria-labelledby="recursos-title" aria-live="polite" aria-busy={loading}>
+        {/* Región de anuncio de resultados — WCAG 4.1.3 */}
+        <p className="sr-only" aria-live="polite" aria-atomic="true">
+          {!loading && (
+            recursosFiltrados.length === 0
+              ? 'Sin resultados'
+              : `${recursosFiltrados.length} ${recursosFiltrados.length === 1 ? 'recurso encontrado' : 'recursos encontrados'}${busqueda ? ` para "${busqueda}"` : ''}`
+          )}
+        </p>
+
+        <section aria-labelledby="recursos-title" aria-busy={loading}>
           <h2 id="recursos-title" className="sr-only">Recursos encontrados</h2>
 
           {loading ? (
             <div className="biblioteca-loading"><Spinner size="lg" label="Cargando recursos de la biblioteca…" /></div>
           ) : recursosFiltrados.length > 0 ? (
             <>
-              <p className="biblioteca-count" aria-live="polite">
+              <p className="biblioteca-count" aria-hidden="true">
                 {recursosFiltrados.length} {recursosFiltrados.length === 1 ? 'recurso encontrado' : 'recursos encontrados'}
                 {busqueda && ` para "${busqueda}"`}
               </p>

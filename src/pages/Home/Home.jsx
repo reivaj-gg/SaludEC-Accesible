@@ -257,7 +257,7 @@ export default function Home() {
           </div>
 
           <div className="hero__visual animate-fade-in">
-            <div aria-hidden="true">
+            <div aria-hidden="true" role="presentation">
               <div className="hero__orb hero__orb--1" />
               <div className="hero__orb hero__orb--2" />
               <div className="hero__orb hero__orb--3" />
@@ -317,7 +317,7 @@ export default function Home() {
       </section>
 
       {/* ── Ecuador en cifras de salud ── */}
-      <section className="section section--alt" aria-labelledby="ec-salud-title">
+      <section className="section" aria-labelledby="ec-salud-title">
         <div className="container">
           <header className="section__header">
             <span className="section__tag">Datos oficiales</span>
