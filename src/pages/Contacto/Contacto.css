@@ -44,6 +44,37 @@
   max-width: none;
 }
 
+/* Resumen de errores (WCAG 3.3.1) */
+.contact-form__error-summary {
+  background: var(--color-error-100);
+  border: 2px solid var(--color-error-500);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  outline: none;
+}
+
+.contact-form__error-summary p {
+  color: var(--color-error-700);
+  margin-bottom: var(--space-2);
+  max-width: none;
+}
+
+.contact-form__error-summary ul {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.contact-form__error-summary li {
+  font-size: var(--text-sm);
+  color: var(--color-error-700);
+  margin-bottom: var(--space-1);
+}
+
+.contact-form__error-summary a {
+  color: var(--color-error-700);
+  font-weight: var(--font-medium);
+}
+
 .contact-form__submit {
   align-self: flex-start;
 }

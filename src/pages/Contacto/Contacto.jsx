@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import PageWrapper from '@components/layout/PageWrapper/PageWrapper'
 import Breadcrumb from '@components/layout/Breadcrumb/Breadcrumb'
 import FormField from '@components/common/FormField/FormField'
@@ -10,12 +10,33 @@ import './Contacto.css'
 
 const INITIAL = { nombre: '', email: '', asunto: '', mensaje: '' }
 
+const FIELD_LABELS = {
+  nombre: 'Nombre completo',
+  email: 'Correo electrónico',
+  asunto: 'Asunto',
+  mensaje: 'Mensaje',
+}
+
 export default function Contacto() {
   const [form, setForm] = useState(INITIAL)
   const [errors, setErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
   const [sent, setSent] = useState(false)
   const toast = useToast()
+  const errorSummaryRef = useRef(null)
+  const successRef = useRef(null)
+
+  // Foco al resumen de errores cuando aparece (WCAG 3.3.1)
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      errorSummaryRef.current?.focus()
+    }
+  }, [errors])
+
+  // Foco a la confirmación de éxito (WCAG 2.4.3)
+  useEffect(() => {
+    if (sent) successRef.current?.focus()
+  }, [sent])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -28,8 +49,6 @@ export default function Contacto() {
     const errs = validateContactForm(form)
     if (Object.keys(errs).length) {
       setErrors(errs)
-      const firstErrorId = Object.keys(errs)[0]
-      document.getElementById(firstErrorId)?.focus()
       return
     }
 
@@ -45,6 +64,8 @@ export default function Contacto() {
       setSubmitting(false)
     }
   }
+
+  const errorList = Object.entries(errors).filter(([, v]) => v)
 
   return (
     <PageWrapper
@@ -63,10 +84,14 @@ export default function Contacto() {
         </header>
 
         <div className="contact-page__layout">
-          {/* Formulario */}
           <div className="contact-page__form-col">
             {sent ? (
-              <div className="contact-success" role="status" aria-live="polite">
+              <div
+                ref={successRef}
+                className="contact-success"
+                role="status"
+                tabIndex={-1}
+              >
                 <span className="contact-success__icon" aria-hidden="true">✅</span>
                 <h2>¡Mensaje enviado!</h2>
                 <p>Gracias por contactarnos. Te responderemos en los próximos días hábiles.</p>
@@ -81,7 +106,32 @@ export default function Contacto() {
                 aria-label="Formulario de contacto"
                 className="contact-form"
               >
-                <p className="contact-form__required-note" aria-live="polite">
+                {/* Resumen único de errores — WCAG 3.3.1 */}
+                {errorList.length > 0 && (
+                  <div
+                    ref={errorSummaryRef}
+                    className="contact-form__error-summary"
+                    role="alert"
+                    tabIndex={-1}
+                  >
+                    <p>
+                      <strong>
+                        {errorList.length === 1
+                          ? 'Se encontró 1 error. Corrígelo para continuar:'
+                          : `Se encontraron ${errorList.length} errores. Corrígelos para continuar:`}
+                      </strong>
+                    </p>
+                    <ul>
+                      {errorList.map(([field, msg]) => (
+                        <li key={field}>
+                          <a href={`#${field}`}>{FIELD_LABELS[field]}: {msg}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <p className="contact-form__required-note">
                   Los campos marcados con <span aria-hidden="true">*</span>
                   <span className="sr-only">asterisco</span> son obligatorios.
                 </p>
@@ -144,7 +194,6 @@ export default function Contacto() {
             )}
           </div>
 
-          {/* Info lateral */}
           <aside className="contact-page__info" aria-label="Información de contacto">
             <div className="contact-info-card">
               <span className="contact-info-card__icon" aria-hidden="true">📍</span>
