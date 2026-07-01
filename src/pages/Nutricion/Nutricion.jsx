@@ -119,24 +119,28 @@ export default function Nutricion() {
               <FormField
                 id="peso"
                 label="Peso"
-                type="number"
+                type="text"
+                inputMode="decimal"
+                pattern="[0-9]+([.,][0-9]+)?"
+                autoComplete="off"
                 required
-                hint="En kilogramos (ej: 70)"
+                hint="En kilogramos (ej: 70 o 70,5)"
                 error={imcErrors.peso}
                 value={imc.peso}
                 onChange={(e) => setImc((p) => ({ ...p, peso: e.target.value }))}
-                min="10" max="500" step="0.1"
               />
               <FormField
                 id="talla"
                 label="Talla"
-                type="number"
+                type="text"
+                inputMode="decimal"
+                pattern="[0-9]+([.,][0-9]+)?"
+                autoComplete="off"
                 required
-                hint="En centímetros (ej: 170)"
+                hint="En centímetros (ej: 170 o 170,5)"
                 error={imcErrors.talla}
                 value={imc.talla}
                 onChange={(e) => setImc((p) => ({ ...p, talla: e.target.value }))}
-                min="50" max="250" step="0.1"
               />
               <Button type="submit" variant="primary">Calcular IMC</Button>
             </form>

@@ -265,6 +265,9 @@
 .module-card:focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-outline-offset);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-blue-200);
+  transform: translateY(-3px);
 }
 
 .module-card__icon {

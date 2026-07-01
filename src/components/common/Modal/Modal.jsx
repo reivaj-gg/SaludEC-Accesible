@@ -49,7 +49,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
   if (!isOpen) return null
 
   return createPortal(
-    <div className="modal-backdrop" aria-hidden="false" onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div className="modal-backdrop" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div
         ref={dialogRef}
         role="dialog"
