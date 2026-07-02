@@ -104,9 +104,13 @@ export default function NoticiasDetalle() {
 
           {noticia.contenido && (
             <div className="prose noticia-articulo__body">
-              <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
-                {noticia.contenido}
-              </ReactMarkdown>
+              {noticia.contenido.trimStart().startsWith('<') ? (
+                <div dangerouslySetInnerHTML={{ __html: noticia.contenido }} />
+              ) : (
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+                  {noticia.contenido}
+                </ReactMarkdown>
+              )}
             </div>
           )}
 

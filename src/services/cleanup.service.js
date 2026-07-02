@@ -24,55 +24,58 @@ function slugify(str) {
 const BASE = 'https://images.unsplash.com/'
 const W = '?w=700&auto=format&fit=crop'
 
-// IDs de Unsplash verificados visualmente para cada tema de salud
+// IDs de Unsplash verificados visualmente — únicos por sección para evitar duplicados visuales
 const IMG = {
-  // Nutrición
-  mediterranea:    ['photo-1498837167922-ddd27525d352', 'Mesa con verduras y ensaladas variadas — patrón de dieta mediterránea'],
-  plato_saludable: ['photo-1512621776951-a57141f2eefd', 'Plato con aguacate, tomates, garbanzos y vegetales coloridos — alimentación balanceada'],
-  antiinflamatorio:['photo-1490645935967-10de6ba17061', 'Bowl con huevo, aguacate, tomates y brotes — dieta antiinflamatoria'],
-  azucar:          ['photo-1490818387583-1baba5e638af', 'Fresas, moras, ruibarbo y naranja — azúcares naturales en frutas frescas'],
-  fibra:           ['photo-1579113800032-c38bd7635818', 'Zanahoria, calabacín, pimiento y rábanos — verduras ricas en fibra dietética'],
-  macronutrientes: ['photo-1490645935967-10de6ba17061', 'Bowl con proteínas, carbohidratos y grasas saludables — macronutrientes esenciales'],
-  superalimentos:  ['photo-1505576399279-565b52d4ac71', 'Ensalada colorida en frasco de vidrio — superalimentos y nutrientes esenciales'],
-  embarazo:        ['photo-1493894473891-10fc1e5dbd22', 'Mujer embarazada formando corazón con sus manos — alimentación saludable en el embarazo'],
-  hidratacion:     ['photo-1548839140-29a749e1cf4d', 'Agua cristalina vertiéndose en vaso — hidratación diaria recomendada'],
-  alimentacion:    ['photo-1512621776951-a57141f2eefd', 'Plato con vegetales coloridos y proteínas — guía de alimentación saludable'],
-  // Atención primaria
-  consulta_msp:    ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio revisando información — consulta en centro de salud público MSP'],
-  hospital:        ['photo-1586773860418-d37222d8fce3', 'Edificio moderno de hospital público con amplia fachada — sistema de salud pública'],
-  iess:            ['photo-1519494026892-80bbd2d6fd0d', 'Recepción de clínica con señalización de servicios — atención en unidades del IESS'],
-  // Ejercicio
-  hiit:            ['photo-1517836357463-d25dfeac3438', 'Persona realizando peso muerto en el gimnasio — entrenamiento HIIT de alta intensidad'],
-  yoga:            ['photo-1544367567-0f2fcb009e0b', 'Silueta de persona en posición de loto al atardecer — práctica de yoga y meditación'],
-  caminar:         ['photo-1477332552946-cfb384aeaf1c', 'Persona caminando por sendero rural al atardecer — beneficios de caminar diariamente'],
-  correr:          ['photo-1552674605-db6ffd4facb5', 'Persona corriendo en parque urbano — programa de entrenamiento para correr'],
-  fuerza_mayor:    ['photo-1534438327276-14e5300c3a48', 'Sala de gimnasio con mancuernas y racks — entrenamiento de fuerza para adultos mayores'],
-  fuerza:          ['photo-1581009146145-b5ef050c2e1e', 'Hombre levantando mancuernas en el gimnasio — entrenamiento de fuerza muscular'],
-  sedentarismo:    ['photo-1498049794561-7780e7231661', 'Auriculares y computador portátil sobre escritorio — riesgo del sedentarismo prolongado'],
-  fitt:            ['photo-1581009146145-b5ef050c2e1e', 'Persona en gimnasio con mancuernas — principio FITT para diseñar rutina de ejercicio'],
-  ejercicio_diab:  ['photo-1571019613454-1cb2f99b2d8b', 'Mujer realizando abdominales en el gimnasio — actividad física para control de diabetes'],
-  principiante:    ['photo-1571019614242-c5c5dee9f50b', 'Entrenador personal guiando a principiante — cómo empezar a hacer ejercicio'],
-  // Salud mental
-  terapia:         ['photo-1573497019236-17f8177b81e8', 'Mujer sentada en consultorio con actitud abierta — sesión de terapia cognitivo-conductual'],
-  mindfulness:     ['photo-1506126613408-eca07ce68773', 'Mujer meditando en posición de loto al atardecer bajo palmeras — práctica de mindfulness'],
-  sueno:           ['photo-1531353826977-0941b4779a1c', 'Persona durmiendo profundamente cubierta con cobija — higiene del sueño y descanso'],
-  ansiedad:        ['photo-1493836512294-502baa1986e2', 'Hombre sentado en sofá con la mano en la frente — síntomas de ansiedad y estrés'],
-  burnout:         ['photo-1499750310107-5fef28a66643', 'Computador portátil y café sobre mesa de madera — síndrome de burnout laboral'],
-  duelo:           ['photo-1493836512294-502baa1986e2', 'Persona en postura de reflexión y tristeza — proceso de duelo tras una pérdida'],
-  respiracion:     ['photo-1490730141103-6cac27aaab94', 'Silueta de persona con brazos abiertos frente al mar al atardecer — respiración consciente'],
-  autoestima:      ['photo-1529156069898-49953e39b3ac', 'Grupo de amigos sonrientes junto al mar — autoestima y relaciones sociales positivas'],
-  salud_mental:    ['photo-1493836512294-502baa1986e2', 'Persona en reflexión profunda — bienestar y salud mental emocional'],
-  linea182:        ['photo-1544027993-37dbfe43562a', 'Dos manos alcanzándose — apoyo emocional y línea de crisis 182'],
-  // Prevención / Emergencias
-  hipertension:    ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio en control médico — prevención y manejo de hipertensión arterial'],
-  diabetes_prev:   ['photo-1571019613454-1cb2f99b2d8b', 'Persona realizando ejercicio físico — prevención de diabetes tipo 2 con estilo de vida activo'],
-  vacunacion:      ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio — esquema de vacunación infantil PAI del Ecuador'],
-  vacunacion_covid:['photo-1605289982774-9a6fef564df8', 'Frascos de vacunas del programa nacional de inmunización para adultos en Ecuador'],
-  examen_prev:     ['photo-1576091160550-2173dba999ef', 'Manos en computador con estetoscopio — consulta de exámenes preventivos de salud'],
-  tabaquismo:      ['photo-1493836512294-502baa1986e2', 'Persona bajo estrés — consecuencias del tabaquismo en la salud mental y física'],
-  cancer_piel:     ['photo-1576091160550-2173dba999ef', 'Profesional de salud con computador — consulta preventiva para detección de cáncer de piel'],
-  rcp:             ['photo-1576091160399-112ba8d25d1d', 'Profesional de salud listo para asistir — RCP básica y primeros auxilios cardiorrespiratorios'],
-  ecu911:          ['photo-1586773860418-d37222d8fce3', 'Edificio de servicio de salud pública — sistema de emergencias ECU 911'],
+  // ── Nutrición (sección Atención Primaria) ─────────────────
+  mediterránea:       ['photo-1498837167922-ddd27525d352', 'Mesa con verduras y ensaladas variadas — patrón de dieta mediterránea'],
+  plato_saludable:    ['photo-1512621776951-a57141f2eefd', 'Plato con aguacate, tomates, garbanzos y vegetales coloridos — alimentación balanceada'],
+  antiinflamatorio:   ['photo-1490645935967-10de6ba17061', 'Bowl con huevo, aguacate, tomates y brotes — dieta antiinflamatoria'],
+  azucar:             ['photo-1490818387583-1baba5e638af', 'Fresas, moras, ruibarbo y naranja — azúcares naturales en frutas frescas'],
+  fibra:              ['photo-1579113800032-c38bd7635818', 'Zanahoria, calabacín, pimiento y rábanos — verduras ricas en fibra dietética'],
+  macronutrientes:    ['photo-1543362906-acfc16c67564', 'Vegetales verdes organizados — macronutrientes esenciales en la alimentación'],
+  superalimentos:     ['photo-1505576399279-565b52d4ac71', 'Ensalada colorida en frasco de vidrio — superalimentos y nutrientes esenciales'],
+  embarazo:           ['photo-1493894473891-10fc1e5dbd22', 'Mujer embarazada formando corazón con sus manos — alimentación en el embarazo'],
+  hidratacion:        ['photo-1548839140-29a749e1cf4d', 'Agua cristalina vertiéndose en vaso — hidratación diaria recomendada'],
+  alimentacion:       ['photo-1546069901-ba9599a7e63c', 'Bowl colorido con tofu, vegetales y proteínas — guía de alimentación balanceada'],
+  // ── Atención primaria (sección Atención Primaria) ─────────
+  consulta_msp:       ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio revisando información — consulta en centro de salud público MSP'],
+  hospital:           ['photo-1586773860418-d37222d8fce3', 'Edificio moderno de hospital público con amplia fachada — sistema de salud pública'],
+  iess:               ['photo-1519494026892-80bbd2d6fd0d', 'Recepción de clínica con señalización de servicios — atención en unidades del IESS'],
+  // ── Ejercicio (sección Vacunación) ────────────────────────
+  hiit:               ['photo-1517836357463-d25dfeac3438', 'Persona realizando peso muerto en el gimnasio — entrenamiento HIIT de alta intensidad'],
+  yoga:               ['photo-1544367567-0f2fcb009e0b', 'Silueta de persona en posición de loto al atardecer — práctica de yoga y meditación'],
+  caminar:            ['photo-1477332552946-cfb384aeaf1c', 'Persona caminando por sendero rural al atardecer — beneficios de caminar diariamente'],
+  correr:             ['photo-1552674605-db6ffd4facb5', 'Persona corriendo en parque urbano — programa de entrenamiento para correr'],
+  fuerza_mayor:       ['photo-1534438327276-14e5300c3a48', 'Sala de gimnasio con mancuernas y racks — entrenamiento de fuerza para adultos mayores'],
+  fuerza:             ['photo-1581009146145-b5ef050c2e1e', 'Hombre levantando mancuernas en el gimnasio — entrenamiento de fuerza muscular'],
+  sedentarismo:       ['photo-1498049794561-7780e7231661', 'Auriculares y computador portátil sobre escritorio — riesgo del sedentarismo prolongado'],
+  fitt:               ['photo-1533681904393-9ab6eee7e408', 'Persona empujando trineo de entrenamiento — principio FITT: frecuencia, intensidad, tiempo y tipo'],
+  ejercicio_diab:     ['photo-1571019613454-1cb2f99b2d8b', 'Mujer realizando abdominales en el gimnasio — actividad física para control de diabetes'],
+  principiante:       ['photo-1571019614242-c5c5dee9f50b', 'Entrenador personal guiando a principiante — cómo empezar a hacer ejercicio'],
+  // ── Vacunación (sección Vacunación) — 4 imágenes distintas ──
+  vacunacion:         ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio — esquema de vacunación infantil PAI del Ecuador'],
+  vacunacion_covid:   ['photo-1605289982774-9a6fef564df8', 'Frascos de vacunas COVID-19 del programa nacional de inmunización adultos Ecuador'],
+  vacunacion_adultos: ['photo-1576765608535-5f04d1e3f289', 'Enfermera aplicando vacuna en brazo de adulto mayor — calendario de vacunación para adultos'],
+  vacunacion_guia:    ['photo-1599493758267-c6c884c7071f', 'Profesional de salud con equipo de protección — guía completa de vacunación en adultos'],
+  // ── Salud mental (sección Salud Mental) ───────────────────
+  terapia:            ['photo-1573497019236-17f8177b81e8', 'Mujer sentada en consultorio con actitud abierta — sesión de terapia cognitivo-conductual'],
+  mindfulness:        ['photo-1506126613408-eca07ce68773', 'Mujer meditando en posición de loto al atardecer bajo palmeras — práctica de mindfulness'],
+  sueno:              ['photo-1531353826977-0941b4779a1c', 'Persona durmiendo profundamente cubierta con cobija — higiene del sueño y descanso'],
+  ansiedad:           ['photo-1493836512294-502baa1986e2', 'Hombre sentado en sofá con la mano en la frente — síntomas de ansiedad y estrés'],
+  burnout:            ['photo-1499750310107-5fef28a66643', 'Computador portátil y café sobre mesa de madera — síndrome de burnout laboral'],
+  duelo:              ['photo-1541199249251-f713e6145474', 'Persona con rostro oculto entre manos, cajas al fondo — proceso de duelo y pérdida'],
+  respiracion:        ['photo-1490730141103-6cac27aaab94', 'Silueta de persona con brazos abiertos frente al mar al atardecer — respiración consciente'],
+  autoestima:         ['photo-1529156069898-49953e39b3ac', 'Grupo de amigos sonrientes junto al mar — autoestima y relaciones sociales positivas'],
+  salud_mental:       ['photo-1516302752625-fcc3c50ae61f', 'Mujer mostrando papel con sonrisa dibujada — bienestar emocional y salud mental'],
+  linea182:           ['photo-1544027993-37dbfe43562a', 'Dos manos alcanzándose — apoyo emocional y línea de crisis 182'],
+  // ── Prevención / Emergencias (sección Emergencias) ────────
+  hipertension:       ['photo-1582750433449-648ed127bb54', 'Médico con mascarilla y estetoscopio — control y prevención de hipertensión arterial'],
+  diabetes_prev:      ['photo-1571019613454-1cb2f99b2d8b', 'Persona realizando ejercicio físico — prevención de diabetes tipo 2 con estilo de vida activo'],
+  examen_prev:        ['photo-1576091160550-2173dba999ef', 'Manos en computador con estetoscopio — consulta de exámenes preventivos de salud'],
+  tabaquismo:         ['photo-1493836512294-502baa1986e2', 'Persona bajo estrés — consecuencias del tabaquismo en la salud'],
+  cancer_piel:        ['photo-1512290923902-8a9f81dc236c', 'Tratamiento dermatológico en consulta especializada — prevención y detección de cáncer de piel'],
+  rcp:                ['photo-1530026186672-2cd00ffc50fe', 'Modelo anatómico de corazón sobre libro médico — RCP y primeros auxilios cardiorrespiratorios'],
+  ecu911:             ['photo-1586773860418-d37222d8fce3', 'Edificio moderno de servicio de emergencias — sistema ECU 911 del Ecuador'],
 }
 
 function img(key) {
@@ -161,11 +164,13 @@ function getImgArticulo(titulo = '', modulo = '') {
   if (t.includes('diabetes') && (t.includes('prevenci') || t.includes('tipo 2')))
     return img('diabetes_prev')
   if (t.includes('vacuna') || t.includes('inmuniz') || t.includes('pai') || t.includes('esquema')) {
-    // Vacunación infantil/PAI → imagen de enfermera vacunando niño
     if (t.includes('infantil') || t.includes('niño') || t.includes('nino') || t.includes('pai') || t.includes('esquema'))
-      return img('vacunacion')
-    // Vacunación adultos/general → imagen más genérica de vacunas (COVID vials)
-    return img('vacunacion_covid')
+      return img('vacunacion')           // médico — PAI infantil
+    if (t.includes('calendario'))
+      return img('vacunacion_adultos')   // enfermera vacunando adulto mayor
+    if (t.includes('guía completa') || t.includes('guia completa'))
+      return img('vacunacion_guia')      // profesional con equipo protección
+    return img('vacunacion_covid')       // viales COVID — vacunas adultos general
   }
   if (t.includes('examen') || t.includes('chequeo') || t.includes('preventivo'))
     return img('examen_prev')
@@ -190,24 +195,30 @@ function getImgArticulo(titulo = '', modulo = '') {
 
 function getImgNoticia(titulo = '') {
   const t = titulo.toLowerCase()
+  // Vacunación e influenza (antes del check 'mental' para no capturarse por él)
+  if (t.includes('vacuna') || t.includes('influenza') || t.includes('inmuniz'))
+    return { url: `${BASE}photo-1576765608535-5f04d1e3f289${W}`, alt: 'Enfermera aplicando vacuna a adulto — campaña nacional de vacunación' }
+  // Apps / tecnología (antes del check genérico 'mental')
+  if (t.includes('aplicaci') || t.includes('tecnolog') || t.includes('digital'))
+    return { url: `${BASE}photo-1512941937669-90a1b58e7e9c${W}`, alt: 'Aplicación de salud en teléfono inteligente' }
   if (t.includes('sueño') || t.includes('dormir') || t.includes('luz azul'))
-    return { url: `${BASE}photo-1541781774459-bb2af2f05b55${W}`, alt: 'Persona durmiendo en habitación oscura y tranquila' }
+    return { url: `${BASE}photo-1531353826977-0941b4779a1c${W}`, alt: 'Persona durmiendo en habitación tranquila — higiene del sueño' }
   if (t.includes('sedentarismo') || t.includes('muévete') || t.includes('movete') || t.includes('actividad física'))
     return { url: `${BASE}photo-1571019614242-c5c5dee9f50b${W}`, alt: 'Personas realizando actividad física al aire libre' }
   if (t.includes('mindfulness') || t.includes('meditaci') || t.includes('mental'))
-    return { url: `${BASE}photo-1506126613408-eca07ce68773${W}`, alt: 'Persona meditando con calma' }
-  if (t.includes('oms') || t.includes('ops') || t.includes('global') || t.includes('plan'))
-    return { url: `${BASE}photo-1576091160399-112ba8d25d1d${W}`, alt: 'Centro de salud con profesionales médicos' }
-  if (t.includes('aplicaci') || t.includes('tecnolog') || t.includes('digital'))
-    return { url: `${BASE}photo-1512941937669-90a1b58e7e9c${W}`, alt: 'Aplicación de salud en teléfono inteligente' }
-  if (t.includes('ecuador') && (t.includes('aliment') || t.includes('etiquet')))
-    return { url: `${BASE}photo-1512621776951-a57141f2eefd${W}`, alt: 'Etiquetado nutricional en productos alimenticios de Ecuador' }
+    return { url: `${BASE}photo-1506126613408-eca07ce68773${W}`, alt: 'Persona meditando con calma en la naturaleza' }
+  if (t.includes('ops') || t.includes('latinoameric') || t.includes('latino') || t.includes('doble carga'))
+    return { url: `${BASE}photo-1543362906-acfc16c67564${W}`, alt: 'Alimentación y salud pública en América Latina — doble carga de malnutrición' }
+  if (t.includes('oms') || t.includes('global') || t.includes('plan') || t.includes('guías'))
+    return { url: `${BASE}photo-1576091160399-112ba8d25d1d${W}`, alt: 'Profesional de salud — directrices OMS de salud pública' }
+  if (t.includes('ecuador') && (t.includes('aliment') || t.includes('etiquet') || t.includes('ultraprocesad')))
+    return { url: `${BASE}photo-1474440692490-2e83ae13ba29${W}`, alt: 'Canasta con vegetales frescos — etiquetado nutricional en alimentos del Ecuador' }
   if (t.includes('beneficio') || t.includes('investig') || t.includes('estudio'))
-    return { url: `${BASE}photo-1532187863486-abf9dbad1b69${W}`, alt: 'Investigadores en laboratorio analizando datos de salud' }
-  if (t.includes('doble') || t.includes('americ') || t.includes('latino'))
-    return { url: `${BASE}photo-1576091160399-112ba8d25d1d${W}`, alt: 'Sistema de salud pública en América Latina' }
-  // generic news fallback
-  return { url: `${BASE}photo-1576091160399-112ba8d25d1d${W}`, alt: 'Noticias de salud pública en Ecuador' }
+    return { url: `${BASE}photo-1532187863486-abf9dbad1b69${W}`, alt: 'Investigadores analizando datos de salud' }
+  if (t.includes('msp') || t.includes('ministerio'))
+    return { url: `${BASE}photo-1582750433449-648ed127bb54${W}`, alt: 'Profesional de salud pública — Ministerio de Salud Pública del Ecuador' }
+  // generic news fallback — imagen de investigación médica
+  return { url: `${BASE}photo-1532187863486-abf9dbad1b69${W}`, alt: 'Noticias de salud pública en Ecuador' }
 }
 
 function getThumbRecurso(titulo = '', tipo = '') {

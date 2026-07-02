@@ -89,9 +89,13 @@ export default function ArticleDetail({ articulo, volverRuta, volverLabel, modul
           </header>
 
           <div className="prose article-detail__body">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
-              {contenidoLimpio}
-            </ReactMarkdown>
+            {contenidoLimpio.trimStart().startsWith('<') ? (
+              <div dangerouslySetInnerHTML={{ __html: contenidoLimpio }} />
+            ) : (
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+                {contenidoLimpio}
+              </ReactMarkdown>
+            )}
           </div>
 
           {articulo.fuentes && (
