@@ -36,7 +36,9 @@ const IMG = {
   superalimentos:     ['photo-1505576399279-565b52d4ac71', 'Ensalada colorida en frasco de vidrio — superalimentos y nutrientes esenciales'],
   embarazo:           ['photo-1493894473891-10fc1e5dbd22', 'Mujer embarazada formando corazón con sus manos — alimentación en el embarazo'],
   hidratacion:        ['photo-1548839140-29a749e1cf4d', 'Agua cristalina vertiéndose en vaso — hidratación diaria recomendada'],
+  hidratacion_alt:    ['photo-1523362628745-0c100150b504', 'Botella de agua sobre mesa oscura — cuánta agua necesitas al día'],
   alimentacion:       ['photo-1546069901-ba9599a7e63c', 'Bowl colorido con tofu, vegetales y proteínas — guía de alimentación balanceada'],
+  mediterranea_alt:   ['photo-1473093295043-cdd812d0e601', 'Pasta con tomate fresco y hierbas — patrón alimentario mediterráneo'],
   // ── Atención primaria (sección Atención Primaria) ─────────
   consulta_msp:       ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio revisando información — consulta en centro de salud público MSP'],
   hospital:           ['photo-1586773860418-d37222d8fce3', 'Edificio moderno de hospital público con amplia fachada — sistema de salud pública'],
@@ -47,6 +49,7 @@ const IMG = {
   caminar:            ['photo-1477332552946-cfb384aeaf1c', 'Persona caminando por sendero rural al atardecer — beneficios de caminar diariamente'],
   correr:             ['photo-1552674605-db6ffd4facb5', 'Persona corriendo en parque urbano — programa de entrenamiento para correr'],
   fuerza_mayor:       ['photo-1534438327276-14e5300c3a48', 'Sala de gimnasio con mancuernas y racks — entrenamiento de fuerza para adultos mayores'],
+  fuerza_mayor_alt:   ['photo-1574680096145-d05b474e2155', 'Mujer con barra en espalda en blanco y negro — beneficios del entrenamiento de fuerza'],
   fuerza:             ['photo-1581009146145-b5ef050c2e1e', 'Hombre levantando mancuernas en el gimnasio — entrenamiento de fuerza muscular'],
   sedentarismo:       ['photo-1498049794561-7780e7231661', 'Auriculares y computador portátil sobre escritorio — riesgo del sedentarismo prolongado'],
   fitt:               ['photo-1533681904393-9ab6eee7e408', 'Persona empujando trineo de entrenamiento — principio FITT: frecuencia, intensidad, tiempo y tipo'],
@@ -61,6 +64,7 @@ const IMG = {
   terapia:            ['photo-1573497019236-17f8177b81e8', 'Mujer sentada en consultorio con actitud abierta — sesión de terapia cognitivo-conductual'],
   mindfulness:        ['photo-1506126613408-eca07ce68773', 'Mujer meditando en posición de loto al atardecer bajo palmeras — práctica de mindfulness'],
   sueno:              ['photo-1531353826977-0941b4779a1c', 'Persona durmiendo profundamente cubierta con cobija — higiene del sueño y descanso'],
+  sueno_alt:          ['photo-1540518614846-7eded433c457', 'Dormitorio decorado con cama bien tendida — guía completa de higiene del sueño'],
   ansiedad:           ['photo-1493836512294-502baa1986e2', 'Hombre sentado en sofá con la mano en la frente — síntomas de ansiedad y estrés'],
   burnout:            ['photo-1499750310107-5fef28a66643', 'Computador portátil y café sobre mesa de madera — síndrome de burnout laboral'],
   duelo:              ['photo-1541199249251-f713e6145474', 'Persona con rostro oculto entre manos, cajas al fondo — proceso de duelo y pérdida'],
@@ -72,6 +76,7 @@ const IMG = {
   hipertension:       ['photo-1582750433449-648ed127bb54', 'Médico con mascarilla y estetoscopio — control y prevención de hipertensión arterial'],
   diabetes_prev:      ['photo-1571019613454-1cb2f99b2d8b', 'Persona realizando ejercicio físico — prevención de diabetes tipo 2 con estilo de vida activo'],
   examen_prev:        ['photo-1576091160550-2173dba999ef', 'Manos en computador con estetoscopio — consulta de exámenes preventivos de salud'],
+  examen_alt:         ['photo-1631815588090-d4bfec5b1ccb', 'Médico midiendo presión arterial a paciente — exámenes preventivos esenciales por edad'],
   tabaquismo:         ['photo-1493836512294-502baa1986e2', 'Persona bajo estrés — consecuencias del tabaquismo en la salud'],
   cancer_piel:        ['photo-1512290923902-8a9f81dc236c', 'Tratamiento dermatológico en consulta especializada — prevención y detección de cáncer de piel'],
   rcp:                ['photo-1530026186672-2cd00ffc50fe', 'Modelo anatómico de corazón sobre libro médico — RCP y primeros auxilios cardiorrespiratorios'],
@@ -95,8 +100,11 @@ function getImgArticulo(titulo = '', modulo = '') {
     return img('hospital')
 
   // ── Nutrición / alimentación ──────────────────────────────
-  if (t.includes('mediterr'))
+  if (t.includes('mediterr')) {
+    if (t.includes('patrón') || t.includes('patron'))
+      return img('mediterranea_alt')
     return img('mediterranea')
+  }
   if (t.includes('plato') && t.includes('harvard'))
     return img('plato_saludable')
   if (t.includes('antiinflam'))
@@ -111,8 +119,11 @@ function getImgArticulo(titulo = '', modulo = '') {
     return img('superalimentos')
   if (t.includes('embarazo') || t.includes('gestaci'))
     return img('embarazo')
-  if (t.includes('hidrat') || t.includes('agua'))
+  if (t.includes('hidrat') || t.includes('agua')) {
+    if (t.includes('cuánta') || t.includes('cuanta') || t.includes('cuánto') || t.includes('cuanto'))
+      return img('hidratacion_alt')
     return img('hidratacion')
+  }
 
   // ── Actividad física / ejercicio ──────────────────────────
   if (t.includes('hiit') || t.includes('intervalos de alta'))
@@ -123,8 +134,11 @@ function getImgArticulo(titulo = '', modulo = '') {
     return img('caminar')
   if (t.includes('correr') || t.includes('running') || t.includes('couch to 5'))
     return img('correr')
-  if (t.includes('fuerza') && (t.includes('adulto mayor') || t.includes('mayor') || t.includes('60')))
+  if (t.includes('fuerza') && (t.includes('adulto mayor') || t.includes('mayor') || t.includes('60'))) {
+    if (t.includes('beneficio'))
+      return img('fuerza_mayor_alt')
     return img('fuerza_mayor')
+  }
   if (t.includes('fuerza') || t.includes('pesas') || t.includes('muscula'))
     return img('fuerza')
   if (t.includes('sedentarismo') || t.includes('silla') || t.includes('escritorio'))
@@ -141,8 +155,11 @@ function getImgArticulo(titulo = '', modulo = '') {
     return img('terapia')
   if (t.includes('mindfulness') || t.includes('meditaci'))
     return img('mindfulness')
-  if (t.includes('sueño') || t.includes('sueno') || t.includes('dormir') || t.includes('higiene del sue'))
+  if (t.includes('sueño') || t.includes('sueno') || t.includes('dormir') || t.includes('higiene del sue')) {
+    if (t.includes('guía completa') || t.includes('guia completa'))
+      return img('sueno_alt')
     return img('sueno')
+  }
   if (t.includes('ansiedad') || t.includes('pánico') || t.includes('panico'))
     return img('ansiedad')
   if (t.includes('burnout') || t.includes('agotamient') || t.includes('sindrome'))
@@ -172,8 +189,11 @@ function getImgArticulo(titulo = '', modulo = '') {
       return img('vacunacion_guia')      // profesional con equipo protección
     return img('vacunacion_covid')       // viales COVID — vacunas adultos general
   }
-  if (t.includes('examen') || t.includes('chequeo') || t.includes('preventivo'))
+  if (t.includes('examen') || t.includes('chequeo') || t.includes('preventivo')) {
+    if (t.includes('esencial'))
+      return img('examen_alt')
     return img('examen_prev')
+  }
   if (t.includes('fumar') || t.includes('tabaqui') || t.includes('cigarr'))
     return img('tabaquismo')
   if (t.includes('cáncer') || t.includes('cancer') || t.includes('sol ecuator'))
