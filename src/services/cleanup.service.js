@@ -66,7 +66,7 @@ const IMG = {
   // Prevención / Emergencias
   hipertension:    ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio en control médico — prevención y manejo de hipertensión arterial'],
   diabetes_prev:   ['photo-1571019613454-1cb2f99b2d8b', 'Persona realizando ejercicio físico — prevención de diabetes tipo 2 con estilo de vida activo'],
-  vacunacion:      ['photo-1605289982774-9a6fef564df8', 'Frascos de vacunas del esquema nacional de inmunización — programa PAI Ecuador'],
+  vacunacion:      ['photo-1576091160399-112ba8d25d1d', 'Médico con estetoscopio — esquema de vacunación infantil PAI del Ecuador'],
   vacunacion_covid:['photo-1605289982774-9a6fef564df8', 'Frascos de vacunas del programa nacional de inmunización para adultos en Ecuador'],
   examen_prev:     ['photo-1576091160550-2173dba999ef', 'Manos en computador con estetoscopio — consulta de exámenes preventivos de salud'],
   tabaquismo:      ['photo-1493836512294-502baa1986e2', 'Persona bajo estrés — consecuencias del tabaquismo en la salud mental y física'],

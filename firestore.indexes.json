@@ -36,6 +36,14 @@
       ]
     },
     {
+      "collectionGroup": "recursos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "estado", "order": "ASCENDING" },
+        { "fieldPath": "titulo", "order": "ASCENDING" }
+      ]
+    },
+    {
       "collectionGroup": "mensajes",
       "queryScope": "COLLECTION",
       "fields": [
