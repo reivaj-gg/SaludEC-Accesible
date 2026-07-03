@@ -71,7 +71,7 @@ export default function Mensajes() {
                     {!m.leido && <Badge variant="primary" size="sm">Nuevo</Badge>}
                   </div>
                   <div className="mensaje-item__asunto">{m.asunto}</div>
-                  <div className="mensaje-item__fecha">{fechaStr(m.creadoEn)}</div>
+                  <div className="mensaje-item__fecha">{fechaStr(m.fecha)}</div>
                 </button>
               </li>
             ))}
@@ -86,7 +86,7 @@ export default function Mensajes() {
             <header className="mensajes-detalle__header">
               <div>
                 <h2 className="mensajes-detalle__asunto">{seleccionado.asunto}</h2>
-                <p className="mensajes-detalle__meta">{seleccionado.nombre} &bull; {seleccionado.email} &bull; {fechaStr(seleccionado.creadoEn)}</p>
+                <p className="mensajes-detalle__meta">{seleccionado.nombre} &bull; {seleccionado.email} &bull; {fechaStr(seleccionado.fecha)}</p>
               </div>
               <Button variant="danger" size="sm" onClick={() => eliminar(seleccionado.id)}>Eliminar</Button>
             </header>

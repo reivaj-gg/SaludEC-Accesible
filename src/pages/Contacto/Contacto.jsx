@@ -25,10 +25,12 @@ export default function Contacto() {
   const toast = useToast()
   const errorSummaryRef = useRef(null)
   const successRef = useRef(null)
+  // solo enfoca el resumen cuando el ENVÍO dispara errores, nunca en blur de campo individual
+  const focusSummaryAfterSubmit = useRef(false)
 
-  // Foco al resumen de errores cuando aparece (WCAG 3.3.1)
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (focusSummaryAfterSubmit.current) {
+      focusSummaryAfterSubmit.current = false
       errorSummaryRef.current?.focus()
     }
   }, [errors])
@@ -55,6 +57,7 @@ export default function Contacto() {
     e.preventDefault()
     const errs = validateContactForm(form)
     if (Object.keys(errs).length) {
+      focusSummaryAfterSubmit.current = true
       setErrors(errs)
       return
     }
