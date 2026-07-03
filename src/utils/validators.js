@@ -1,17 +1,35 @@
-export function validateContactForm({ nombre, email, asunto, mensaje }) {
+export function validateField(name, value) {
+  const v = value?.trim() ?? ''
+  switch (name) {
+    case 'nombre':
+      if (!v) return 'El nombre completo es obligatorio.'
+      if (v.split(/\s+/).length < 2) return 'Ingresa tu nombre y apellido (mínimo dos palabras).'
+      if (v.length < 5) return 'El nombre debe tener al menos 5 caracteres.'
+      return ''
+    case 'email':
+      if (!v) return 'El correo electrónico es obligatorio.'
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))
+        return 'Ingresa un correo válido (ej: tu@correo.com).'
+      return ''
+    case 'asunto':
+      if (!v) return 'El asunto es obligatorio.'
+      if (v.length < 3) return 'El asunto debe tener al menos 3 caracteres.'
+      return ''
+    case 'mensaje':
+      if (!v) return 'El mensaje es obligatorio.'
+      if (v.length < 20) return `El mensaje debe tener al menos 20 caracteres (${v.length}/20).`
+      return ''
+    default:
+      return ''
+  }
+}
+
+export function validateContactForm(form) {
   const errors = {}
-
-  if (!nombre?.trim()) errors.nombre = 'El nombre es obligatorio.'
-  else if (nombre.trim().length < 2) errors.nombre = 'El nombre debe tener al menos 2 caracteres.'
-
-  if (!email?.trim()) errors.email = 'El correo electrónico es obligatorio.'
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Ingresa un correo electrónico válido.'
-
-  if (!asunto?.trim()) errors.asunto = 'El asunto es obligatorio.'
-
-  if (!mensaje?.trim()) errors.mensaje = 'El mensaje es obligatorio.'
-  else if (mensaje.trim().length < 10) errors.mensaje = 'El mensaje debe tener al menos 10 caracteres.'
-
+  for (const field of ['nombre', 'email', 'asunto', 'mensaje']) {
+    const err = validateField(field, form[field])
+    if (err) errors[field] = err
+  }
   return errors
 }
 

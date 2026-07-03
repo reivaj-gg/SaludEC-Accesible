@@ -14,7 +14,7 @@ export default function Mensajes() {
   const cargar = async () => {
     setLoading(true)
     try {
-      const snap = await getDocs(query(collection(db, 'mensajes'), orderBy('creadoEn', 'desc')))
+      const snap = await getDocs(query(collection(db, 'mensajes'), orderBy('fecha', 'desc')))
       setMensajes(snap.docs.map((d) => ({ id: d.id, ...d.data() })))
     } finally {
       setLoading(false)

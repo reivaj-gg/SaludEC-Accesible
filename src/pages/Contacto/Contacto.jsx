@@ -5,7 +5,7 @@ import FormField from '@components/common/FormField/FormField'
 import Button from '@components/ui/Button/Button'
 import { useToast } from '@contexts/ToastContext'
 import { enviarMensaje } from '@services/mensajes.service'
-import { validateContactForm } from '@utils/validators'
+import { validateContactForm, validateField } from '@utils/validators'
 import './Contacto.css'
 
 const INITIAL = { nombre: '', email: '', asunto: '', mensaje: '' }
@@ -41,7 +41,14 @@ export default function Contacto() {
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
+    // limpia el error mientras el usuario escribe, pero solo si ya hubo un error previo
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }))
+  }
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target
+    const err = validateField(name, value)
+    setErrors((prev) => ({ ...prev, [name]: err }))
   }
 
   const handleSubmit = async (e) => {
@@ -140,11 +147,13 @@ export default function Contacto() {
                   id="nombre"
                   label="Nombre completo"
                   required
+                  hint="Ingresa tu nombre y apellido"
                   error={errors.nombre}
                   value={form.nombre}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   autoComplete="name"
-                  placeholder="Tu nombre completo"
+                  placeholder="Nombre Apellido"
                 />
 
                 <FormField
@@ -152,9 +161,11 @@ export default function Contacto() {
                   label="Correo electrónico"
                   type="email"
                   required
+                  hint="Ej: tu@correo.com"
                   error={errors.email}
                   value={form.email}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   autoComplete="email"
                   placeholder="tu@correo.com"
                 />
@@ -166,6 +177,7 @@ export default function Contacto() {
                   error={errors.asunto}
                   value={form.asunto}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder="¿Sobre qué nos escribes?"
                 />
 
@@ -174,9 +186,11 @@ export default function Contacto() {
                   label="Mensaje"
                   as="textarea"
                   required
+                  hint={`Mínimo 20 caracteres · ${form.mensaje.trim().length} escritos`}
                   error={errors.mensaje}
                   value={form.mensaje}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   placeholder="Cuéntanos con detalle tu consulta…"
                   rows={6}
                 />
