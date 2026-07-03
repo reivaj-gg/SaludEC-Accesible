@@ -42,25 +42,38 @@
 1. **Inicio** (`/`) — mostrar:
    - El cubo 3D: decir "es interactivo, arrastra para girarlo"
    - La sección "Ecuador en cifras de salud": datos reales de MSP, IESS, ECU 911
-   - Los 4 módulos del sitio
+   - Los 4 módulos del sitio en la barra de navegación
 
 2. **Atención Primaria** (`/atencion-primaria`) — mostrar:
    - Los filtros por categoría
+   - Las tarjetas de artículos: cada una tiene imagen única y relevante al tema
+   - Click en cualquier artículo → contenido HTML renderizado correctamente (párrafos, negritas, encabezados)
    - La calculadora de IMC (formulario funcional con validación)
    - El Accordion de FAQs
 
 3. **Vacunación** (`/vacunacion`) — mostrar:
-   - Tarjetas informativas
-   - FAQs del esquema nacional
+   - Tarjetas con imágenes distintas entre artículos PAI infantil / adultos / calendario
+   - FAQs del esquema nacional PAI Ecuador
 
-4. **Emergencias** (`/emergencias`) — mostrar:
+4. **Salud Mental** (`/salud-mental`) — mostrar:
+   - Artículos con imágenes temáticamente correctas (terapia ≠ ansiedad ≠ sueño)
+   - Línea de crisis 182
+
+5. **Emergencias** (`/emergencias`) — mostrar:
    - Sistema ECU 911, SAMU, hospitales
    - FAQs sobre qué hacer en una emergencia
 
-5. **Contacto** (`/contacto`) — mostrar el formulario accesible
+6. **Noticias** (`/noticias`) — mostrar:
+   - Feed paginado; click en una noticia → contenido HTML renderizado sin etiquetas visibles
+
+7. **Accesibilidad** (`/accesibilidad`) — mostrar la declaración de conformidad WCAG 2.2 AA
+
+8. **Contacto** (`/contacto`) — mostrar el formulario accesible
 
 ### Frases clave para la demo:
 - "Todas las páginas siguen la misma estructura: SkipLink → Navbar → contenido → footer"
+- "Cada artículo tiene una imagen única y descriptiva — no hay duplicados visuales en la misma sección"
+- "El contenido enriquecido del editor admin se renderiza como HTML semántico, no como texto plano"
 - "La calculadora IMC es un ejemplo de formulario con validación accesible"
 - "Los datos son de fuentes oficiales: MSP, IESS, ECU 911"
 
@@ -71,8 +84,10 @@
 ### Mostrar con el sitio abierto:
 
 **P — Perceptible:**
-- Hover sobre una imagen de artículo: "cada imagen tiene texto alternativo"
-- Click en Inspector de Chrome: mostrar `alt` en el código
+- Hover sobre una imagen de artículo: "cada imagen tiene texto alternativo descriptivo del tema"
+- Click en Inspector de Chrome: mostrar `alt` en el código — la descripción coincide con el contenido del artículo
+- "No hay dos artículos en la misma sección con la misma imagen" — WCAG 1.1.1
+- Click en el cuerpo de un artículo: "el contenido del editor admin se renderiza como HTML semántico, no como texto plano"
 - Mostrar la paleta: "contraste mínimo 4.5:1, el nuestro es 17.9:1 en el hero"
 
 **O — Operable:**
@@ -181,7 +196,11 @@
 
 > "Después de evaluación automática con axe DevTools y Lighthouse, revisión manual de criterios WCAG 2.2 y prueba con NVDA y teclado, declaramos que VitaPrevent **cumple sustancialmente con WCAG 2.2 Nivel AA**. Identificamos dos criterios con cumplimiento parcial:
 > 1. **2.5.7 Movimientos de arrastre:** el cubo 3D usa arrastre, pero el contenido es accesible por Navbar. Alternativa documentada.
-> 2. **3.2.6 Ayuda consistente:** el contacto está en el footer, falta enlace contextual en módulos.
+> 2. **3.2.6 Ayuda consistente:** el contacto está en el footer; enlace contextual pendiente en módulos internos.
+>
+> Mejoras implementadas durante el desarrollo:
+> - **WCAG 1.1.1 (Contenido no textual):** cada artículo tiene imagen única por sección y texto alternativo descriptivo del tema concreto del artículo.
+> - **WCAG 1.3.1 (Información y relaciones):** el contenido enriquecido del panel de administración se renderiza como HTML semántico (`<p>`, `<strong>`, `<h2>`…), garantizando que lectores de pantalla interpreten correctamente la jerarquía de contenido.
 >
 > No se presentan barreras de acceso para usuarios con discapacidad."
 

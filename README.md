@@ -21,15 +21,20 @@ Plataforma web de salud preventiva desarrollada con React 19 + Firebase. Proporc
 
 ## Módulos públicos
 
-- **Inicio** — Hero con cubo 3D interactivo, estadísticas y últimas noticias
-- **Nutrición** — Artículos con contenido dinámico desde Firestore
-- **Actividad Física** — Rutinas y guías de ejercicio
-- **Salud Mental** — Bienestar emocional, mindfulness y gestión del estrés
-- **Prevención** — Enfermedades crónicas, vacunación y chequeos preventivos
-- **Biblioteca** — Recursos digitales (infografías, guías, PDFs)
-- **Noticias** — Feed paginado con artículos de actualidad en salud
-- **Contacto** — Formulario accesible con validación
-- **Nosotros** — Equipo, misión y valores
+| Ruta | Sección | Contenido |
+|---|---|---|
+| `/` | Inicio | Hero con cubo 3D interactivo, estadísticas nacionales y últimas noticias |
+| `/atencion-primaria` | Atención Primaria | Artículos de nutrición, alimentación y salud pública desde Firestore |
+| `/vacunacion` | Vacunación | Calendario PAI, esquemas adultos, artículos de actividad física |
+| `/salud-mental` | Salud Mental | Bienestar emocional, mindfulness, gestión del estrés |
+| `/emergencias` | Emergencias | Prevención de enfermedades crónicas, chequeos preventivos, ECU 911 |
+| `/biblioteca` | Biblioteca | Recursos digitales: infografías, guías, PDFs y videos |
+| `/noticias` | Noticias | Feed paginado de actualidad en salud pública |
+| `/contacto` | Contacto | Formulario accesible con validación en tiempo real |
+| `/nosotros` | Nosotros | Equipo, misión y valores |
+| `/accesibilidad` | Accesibilidad | Declaración de conformidad WCAG 2.2 AA |
+
+> Las rutas anteriores (`/nutricion`, `/actividad-fisica`, `/prevencion`) redirigen automáticamente a las nuevas mediante `<Navigate replace>`.
 
 ---
 
@@ -78,14 +83,21 @@ firebase deploy --only hosting --project vitaprevent-b2e34
 
 ## Accesibilidad
 
-El proyecto implementa WCAG 2.2 Nivel AA:
+El proyecto cumple sustancialmente con WCAG 2.2 Nivel AA:
 
-- Navegación completa por teclado con foco visible
-- SkipLink al contenido principal
-- HTML5 semántico + WAI-ARIA selectivo
-- Contraste de color ≥ 4.5:1 en todo el texto
+- Navegación completa por teclado con foco visible (`:focus-visible`)
+- SkipLink al contenido principal (WCAG 2.4.1)
+- HTML5 semántico + WAI-ARIA selectivo — `aria-expanded`, `aria-current`, `aria-live`
+- Contraste de color ≥ 4.5:1 en todo el texto normal (ratio real: hasta 17.9:1)
 - Soporte para `prefers-reduced-motion` y `prefers-color-scheme`
-- Lectores de pantalla compatibles (NVDA, VoiceOver)
+- Lectores de pantalla compatibles: NVDA + Chrome, VoiceOver + Safari
+- Contenido WYSIWYG renderizado como HTML semántico (no como texto plano)
+- Imágenes únicas por sección con texto alternativo descriptivo del tema del artículo (WCAG 1.1.1)
+- Declaración de conformidad disponible en `/accesibilidad`
+
+**Criterios con cumplimiento parcial documentado:**
+- 2.5.7 Movimientos de arrastre: cubo 3D usa arrastre; alternativa de navegación existe vía Navbar
+- 3.2.6 Ayuda consistente: contacto en footer; enlace contextual pendiente en módulos
 
 ---
 

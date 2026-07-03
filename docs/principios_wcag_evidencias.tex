@@ -153,7 +153,8 @@ El contenido no puede depender de un único sentido (visión, audición) para se
 
 \begin{itemize}
   \item \textbf{Emojis decorativos:} Todos los emojis usados como íconos visuales tienen \texttt{aria-hidden="true"} para que los lectores de pantalla los ignoren.
-  \item \textbf{Imágenes de artículos:} El campo \texttt{imagen.alt} es obligatorio en Firestore. El componente \texttt{ArticleCard} lo consume directamente.
+  \item \textbf{Imágenes de artículos:} El campo \texttt{imagen.alt} es obligatorio en Firestore. El componente \texttt{ArticleCard} lo consume directamente. Cada artículo tiene imagen única dentro de su sección --- no existe ningún par de artículos en la misma página que compartan la misma fotografía, evitando que un lector de pantalla anuncie el mismo \texttt{alt} dos veces para contenidos distintos.
+  \item \textbf{Alt descriptivo del tema:} El texto alternativo se genera automáticamente describiendo el tema específico del artículo (p.~ej.\ ``Médico midiendo presión arterial --- exámenes preventivos esenciales'' es distinto de ``Manos con estetoscopio --- consulta preventiva''), no un texto genérico común para todos.
   \item \textbf{Cubo 3D:} Marcado con \texttt{aria-hidden="true"} --- el contenido es accesible vía Navbar.
 \end{itemize}
 
@@ -180,6 +181,8 @@ El contenido no puede depender de un único sentido (visión, audición) para se
 \textbf{Criterio:} La información, estructura y relaciones percibidas visualmente pueden determinarse programáticamente o están disponibles en texto.
 
 \textbf{Cómo se cumple:}
+
+Además de la estructura semántica de la página, el \textbf{cuerpo del contenido} de artículos y noticias se renderiza preservando su jerarquía HTML. El contenido almacenado en Firestore proviene del editor WYSIWYG del panel administrativo (formato HTML) o de texto Markdown. El componente \texttt{ArticleDetail} detecta automáticamente el formato y renderiza HTML con \texttt{dangerouslySetInnerHTML} o Markdown con \texttt{ReactMarkdown}, garantizando que etiquetas como \texttt{<h2>}, \texttt{<p>} y \texttt{<strong>} se transmitan correctamente al DOM --- no como texto plano --- para que los lectores de pantalla interpreten la jerarquía de encabezados y el énfasis semántico del contenido.
 
 \begin{evidbox}[1.3.1 --- Estructura semántica de cada página]
 \begin{lstlisting}[language=XML]

@@ -466,9 +466,9 @@ El panel administrativo gestiona contenido dinámico como artículos, noticias, 
 \textbf{Colección} & \textbf{Campos principales} \\
 \midrule
 articulos &
-  \texttt{titulo, slug, resumen, contenido (Markdown), modulo, categoria, etiquetas, imagen\{url, alt\}, autor, fechaCreacion, fechaActualizacion, estado, orden} \\
+  \texttt{titulo, slug, resumen, contenido (HTML desde editor WYSIWYG o Markdown), modulo, categoria, etiquetas, imagen\{url, alt\}, autor, fechaCreacion, fechaActualizacion, estado, orden} \\
 noticias &
-  \texttt{titulo, slug, resumen, contenido (Markdown), imagen\{url, alt\}, creadoEn, categoria, publicado, fuenteUrl} \\
+  \texttt{titulo, slug, resumen, contenido (HTML desde editor WYSIWYG o Markdown), imagen\{url, alt\}, creadoEn, categoria, publicado, fuenteUrl} \\
 recursos &
   \texttt{tipo, titulo, descripcion, url, thumbnail\{url, alt\}, modulo, categoria, transcripcion, estado} \\
 faqs &
@@ -639,11 +639,11 @@ Se prueba con \textbf{NVDA 2024.1 + Chrome 126} la lectura de landmarks, encabez
 \bottomrule
 \endlastfoot
 
-1.1.1 & Contenido no textual & A & \textcolor{successgreen}{\cmark~Implementado} & \texttt{alt} + \texttt{title} en todas las imágenes. Fallback al título del artículo/noticia. Emojis decorativos con \texttt{aria-hidden="true"}. \\
+1.1.1 & Contenido no textual & A & \textcolor{successgreen}{\cmark~Implementado} & \texttt{alt} + \texttt{title} en todas las imágenes. Fallback al título del artículo/noticia. Emojis decorativos con \texttt{aria-hidden="true"}. Imágenes únicas por sección: ningún artículo comparte foto con otro del mismo módulo; el \texttt{alt} describe el tema específico del artículo. \\
 
 1.2.2 & Subtítulos & A & \textcolor{graymid}{N/A} & El sitio no incluye video con audio propio; los recursos de video son enlaces externos. \\
 
-1.3.1 & Información y relaciones & A & \textcolor{successgreen}{\cmark~Implementado} & HTML5 semántico: \texttt{<header>}, \texttt{<nav>}, \texttt{<main>}, \texttt{<section aria-labelledby>}, \texttt{<footer>}. Tablas con \texttt{<caption>} y \texttt{scope}. \\
+1.3.1 & Información y relaciones & A & \textcolor{successgreen}{\cmark~Implementado} & HTML5 semántico: \texttt{<header>}, \texttt{<nav>}, \texttt{<main>}, \texttt{<section aria-labelledby>}, \texttt{<footer>}. Tablas con \texttt{<caption>} y \texttt{scope}. El cuerpo de artículos y noticias se renderiza como HTML semántico preservado (\texttt{<p>}, \texttt{<strong>}, \texttt{<h2>}…) para que lectores de pantalla interpreten correctamente la jerarquía del contenido. \\
 
 1.3.5 & Propósito del campo & AA & \textcolor{successgreen}{\cmark~Implementado} & \texttt{autocomplete="name"}, \texttt{"email"}, \texttt{"tel"} en formulario de contacto. \\
 
@@ -750,9 +750,12 @@ En este avance se ha completado lo siguiente:
   \item Sistema de rutas con React Router v6 y lazy loading (ver Sección 9).
   \item Integración con Firebase Firestore, Authentication y Hosting.
   \item Implementación de 13 componentes reutilizables accesibles (ver Sección 13).
+  \item Panel administrativo con CRUD completo: artículos, noticias, recursos, mensajes y servicio de limpieza de base de datos.
+  \item Imágenes únicas por sección: sistema de asignación automática garantiza que ningún artículo comparte imagen con otro del mismo módulo.
+  \item Renderizado semántico del contenido: artículos y noticias con HTML del editor WYSIWYG se renderizan preservando la jerarquía semántica (\texttt{<p>}, \texttt{<h2>}, \texttt{<strong>}), garantizando lectura correcta por tecnologías asistivas (WCAG 1.3.1).
   \item Despliegue funcional en \href{https://vitaprevent-b2e34.web.app}{\texttt{vitaprevent-b2e34.web.app}}.
   \item Evaluación de accesibilidad con axe DevTools (0 violaciones), Lighthouse (97/100) y NVDA.
-  \item Corrección de 3 problemas de accesibilidad detectados durante el desarrollo.
+  \item Corrección de 5 problemas de accesibilidad detectados durante el desarrollo.
   \item Repositorio actualizado en \href{https://github.com/zeuspyEC/VitaPrevent}{\texttt{github.com/zeuspyEC/VitaPrevent}}.
 \end{itemize}
 
@@ -762,7 +765,7 @@ En este avance se ha completado lo siguiente:
 \begin{itemize}
   \item \textbf{WCAG 2.5.7 (parcial):} El cubo 3D usa arrastre; la alternativa de teclado no está documentada explícitamente en el marcado.
   \item \textbf{WCAG 3.2.6 (parcial):} El enlace de ayuda contextual dentro de módulos no está implementado aún.
-  \item \textbf{Panel administrativo:} La gestión de contenidos está parcialmente implementada (login funcional, CRUD de artículos en progreso).
+  \item \textbf{Panel administrativo:} CRUD completo implementado --- artículos, noticias, recursos y mensajes gestionables desde el panel. Incluye servicio de limpieza automática que asigna imágenes verificadas a todos los documentos.
   \item \textbf{Multimedia con transcripción:} El sitio enlaza recursos de video externos; no se incluyen videos propios con subtítulos/transcripción propios.
   \item \textbf{Prueba con VoiceOver:} Solo se pudo probar con NVDA en Windows. La prueba con VoiceOver (macOS/iOS) se realizó parcialmente.
 \end{itemize}
@@ -794,7 +797,7 @@ Para el siguiente avance se plantea:
 
   \item \textbf{Las herramientas automáticas son insuficientes:} axe y Lighthouse detectan el 30--40\% de los problemas. La revisión manual con teclado y NVDA reveló el bug de orden de foco en \texttt{PageWrapper} (WCAG 2.4.3) que ninguna herramienta automática había detectado.
 
-  \item \textbf{El ciclo detectar-corregir-documentar es fundamental:} Cada corrección de accesibilidad aplicada (3 correcciones en este avance) fue documentada en la matriz, el código y el historial de commits para mantener trazabilidad completa.
+  \item \textbf{El ciclo detectar-corregir-documentar es fundamental:} Cada corrección de accesibilidad aplicada (5 correcciones en este avance: orden de foco, imágenes únicas por sección, renderizado HTML semántico del contenido, diferenciación de imágenes PAI/adultos y corrección de caracteres acentuados en claves de routing) fue documentada en la matriz, el código y el historial de commits para mantener trazabilidad completa.
 \end{enumerate}
 
 % ============================================================
