@@ -175,13 +175,16 @@
 2. Click "Scan ALL of my page"
 3. Mostrar resultado: **0 violaciones críticas, 0 graves**
 
-**Lighthouse:**
-1. DevTools → Lighthouse → Run audit (Desktop)
-2. Mostrar puntuación: **Accessibility ~97**
-3. Mencionar la advertencia: cubo 3D drag (WCAG 2.5.7 parcial)
+**Lighthouse / PageSpeed Insights (resultado real 03/07/2026):**
+1. PageSpeed Insights → introducir URL → analizar
+2. Mostrar puntuaciones reales: **Accessibility 92/100, SEO 100/100, Best Practices 96/100**
+3. Performance: **66/100 móvil / 80/100 escritorio** (causa: Google Fonts render-blocking, imágenes Unsplash w=800)
+4. Mencionar issues activos: 2 atributos ARIA prohibidos, 2 errores de contraste — en corrección Sprint 2
 
-**WAVE** (si está disponible):
-- Mostrar los "0 errors" en la barra de resultados
+**WAVE (resultado real 03/07/2026):**
+- 0 errors ✓, AIM Score 10/10 ✓
+- 2 errores de contraste — pendiente corrección
+- 2 alertas (sin estructura de encabezados / sin regiones): **son falsos positivos** — WAVE evalúa el shell HTML antes de que React renderice; con JS activo la estructura completa existe
 
 ### Evaluación manual — qué mencionar:
 - Probado en Chrome, Firefox, Edge, Chrome Mobile
@@ -194,15 +197,17 @@
 
 ### Declaración (leer):
 
-> "Después de evaluación automática con axe DevTools y Lighthouse, revisión manual de criterios WCAG 2.2 y prueba con NVDA y teclado, declaramos que SaludEC **cumple sustancialmente con WCAG 2.2 Nivel AA**. Identificamos dos criterios con cumplimiento parcial:
-> 1. **2.5.7 Movimientos de arrastre:** el cubo 3D usa arrastre, pero el contenido es accesible por Navbar. Alternativa documentada.
-> 2. **3.2.6 Ayuda consistente:** el contacto está en el footer; enlace contextual pendiente en módulos internos.
+> "Después de evaluación automática con axe DevTools, PageSpeed Insights y WAVE, revisión manual y prueba con NVDA y teclado, declaramos que SaludEC **cumple sustancialmente con WCAG 2.2 Nivel AA**. Lighthouse Accessibility: **92/100** (03/07/2026). Criterios pendientes:
+> 1. **2.5.7 Movimientos de arrastre:** el cubo 3D usa arrastre, pero el contenido es accesible por Navbar.
+> 2. **3.2.6 Ayuda consistente:** el contacto está en el footer; enlace contextual pendiente en módulos.
+> 3. **1.4.3 Contraste:** 2 elementos detectados por WAVE y Lighthouse — en corrección Sprint 2.
+> 4. **4.1.2 ARIA:** 2 atributos prohibidos detectados por Lighthouse — en corrección Sprint 2.
 >
 > Mejoras implementadas durante el desarrollo:
-> - **WCAG 1.1.1 (Contenido no textual):** cada artículo tiene imagen única por sección y texto alternativo descriptivo del tema concreto del artículo.
-> - **WCAG 1.3.1 (Información y relaciones):** el contenido enriquecido del panel de administración se renderiza como HTML semántico (`<p>`, `<strong>`, `<h2>`…), garantizando que lectores de pantalla interpreten correctamente la jerarquía de contenido.
+> - **WCAG 1.1.1:** imagen única por sección con texto alternativo descriptivo por artículo.
+> - **WCAG 1.3.1:** contenido WYSIWYG renderizado como HTML semántico preservando jerarquía de encabezados.
 >
-> No se presentan barreras de acceso para usuarios con discapacidad."
+> No se presentan barreras que impidan el acceso a la información de servicios públicos de salud."
 
 ### Conclusiones principales:
 1. "Accesibilidad desde el inicio es más fácil que al final"

@@ -703,8 +703,9 @@ Se prueba con \textbf{NVDA 2024.1 + Chrome 126} la lectura de landmarks, encabez
 \textbf{Herramientas automáticas:}
 \begin{itemize}
   \item \textbf{axe DevTools} (Chrome): 0 violaciones críticas, 0 graves, 0 moderadas en todas las páginas principales.
-  \item \textbf{Lighthouse} (escritorio, Chrome 126): Accessibility 97/100, Performance 94/100, Best Practices 100/100.
-  \item \textbf{WAVE}: 0 errores en la página de inicio y módulos principales.
+  \item \textbf{Lighthouse / PageSpeed Insights} (03/07/2026, Lighthouse 13.4.0): Accessibility \textbf{92/100}, Performance 66/100 (móvil, 4G lenta) / 80/100 (escritorio), Best Practices 96/100, SEO 100/100.
+  \item \textbf{WAVE} (03/07/2026): 0 errores; \textbf{2 errores de contraste}; 2 alertas (sin estructura de encabezados y sin regiones de página --- falsos positivos del SPA: WAVE evalúa el shell HTML estático antes de que React renderice); 1 característica (idioma detectado); AIM Score: 10/10.
+  \item \textbf{Problemas activos detectados por Lighthouse:} (1) elementos con atributos ARIA prohibidos; (2) colores sin contraste suficiente --- ambos en proceso de corrección en Sprint 2.
 \end{itemize}
 
 \textbf{Evaluación manual:}
@@ -754,7 +755,7 @@ En este avance se ha completado lo siguiente:
   \item Imágenes únicas por sección: sistema de asignación automática garantiza que ningún artículo comparte imagen con otro del mismo módulo.
   \item Renderizado semántico del contenido: artículos y noticias con HTML del editor WYSIWYG se renderizan preservando la jerarquía semántica (\texttt{<p>}, \texttt{<h2>}, \texttt{<strong>}), garantizando lectura correcta por tecnologías asistivas (WCAG 1.3.1).
   \item Despliegue funcional en \href{https://vitaprevent-b2e34.web.app}{\texttt{vitaprevent-b2e34.web.app}}.
-  \item Evaluación de accesibilidad con axe DevTools (0 violaciones), Lighthouse (97/100) y NVDA.
+  \item Evaluación de accesibilidad con axe DevTools (0 violaciones), Lighthouse Accessibility 92/100 (03/07/2026) y NVDA; 2 issues detectados (contraste, ARIA prohibido) en corrección.
   \item Corrección de 5 problemas de accesibilidad detectados durante el desarrollo.
   \item Repositorio actualizado en \href{https://github.com/zeuspyEC/SaludEC}{\texttt{github.com/zeuspyEC/SaludEC}}.
 \end{itemize}
@@ -765,7 +766,10 @@ En este avance se ha completado lo siguiente:
 \begin{itemize}
   \item \textbf{WCAG 2.5.7 (parcial):} El cubo 3D usa arrastre; la alternativa de teclado no está documentada explícitamente en el marcado.
   \item \textbf{WCAG 3.2.6 (parcial):} El enlace de ayuda contextual dentro de módulos no está implementado aún.
-  \item \textbf{Panel administrativo:} CRUD completo implementado --- artículos, noticias, recursos y mensajes gestionables desde el panel. Incluye servicio de limpieza automática que asigna imágenes verificadas a todos los documentos.
+  \item \textbf{WCAG 1.4.3 --- Contraste (issue activo):} PageSpeed Insights y WAVE detectan 2 elementos con ratio de contraste insuficiente. Pendiente identificar y corregir antes de la entrega final.
+  \item \textbf{WCAG 4.1.2 --- ARIA prohibido (issue activo):} Lighthouse detecta 2 elementos con atributos \texttt{aria-*} no permitidos para su rol. Pendiente corrección en Sprint 2.
+  \item \textbf{Rendimiento móvil (66/100):} FCP 5,0 s y LCP 5,6 s en emulación de Moto G Power con 4G lenta. Causas: solicitudes que bloquean el renderizado (Google Fonts + CSS principal), imágenes Unsplash a \texttt{w=800} sobredimensionadas, JS no utilizado ($\sim$92 KiB).
+  \item \textbf{CLS 0.326 en escritorio:} Layout shift causado por carga tardía de Google Fonts en footer/navbar y por animación shimmer de skeleton screens no compuesta (\texttt{background-position-x} no es una propiedad compuesta por el GPU).
   \item \textbf{Multimedia con transcripción:} El sitio enlaza recursos de video externos; no se incluyen videos propios con subtítulos/transcripción propios.
   \item \textbf{Prueba con VoiceOver:} Solo se pudo probar con NVDA en Windows. La prueba con VoiceOver (macOS/iOS) se realizó parcialmente.
 \end{itemize}
@@ -776,13 +780,17 @@ En este avance se ha completado lo siguiente:
 Para el siguiente avance se plantea:
 
 \begin{itemize}
-  \item Añadir \texttt{aria-label} explícito al contenedor del cubo 3D para completar WCAG 2.5.7.
-  \item Implementar enlace de ayuda contextual en módulos para completar WCAG 3.2.6.
-  \item Completar el panel administrativo (CRUD completo de artículos, noticias y recursos).
+  \item \textbf{Contraste (1.4.3):} Identificar y corregir los 2 elementos con ratio insuficiente detectados por WAVE/Lighthouse.
+  \item \textbf{ARIA prohibido (4.1.2):} Eliminar atributos \texttt{aria-*} no permitidos para el rol del elemento correspondiente.
+  \item \textbf{CLS $\to$ $<$0.1:} Añadir \texttt{font-display: optional} en Google Fonts para eliminar FOUT; fijar dimensiones explícitas en imágenes de noticias; reemplazar \texttt{background-position-x} por \texttt{transform: translateX} en animación shimmer de skeletons.
+  \item \textbf{Rendimiento móvil:} Reducir parámetro Unsplash de \texttt{w=800} a \texttt{w=400}; diferir carga de Google Fonts (\texttt{rel="preload"} ya implementado, verificar efectividad).
+  \item \textbf{WCAG 2.5.7:} Añadir \texttt{aria-label} explícito al cubo 3D.
+  \item \textbf{WCAG 3.2.6:} Implementar enlace de ayuda contextual en módulos.
+  \item \textbf{Seguridad:} Añadir cabeceras HTTP (CSP, COOP, X-Frame-Options) en \texttt{firebase.json}.
+  \item \textbf{Navegación agéntica:} Crear \texttt{llms.txt} con descripción del sitio para agentes de IA.
   \item Realizar prueba formal con VoiceOver en macOS y documentar resultados.
-  \item Ampliar el contenido de Firestore con más artículos por módulo y datos verificados de fuentes oficiales.
+  \item Ampliar el contenido de Firestore con artículos verificados de fuentes oficiales (MSP, IESS, OPS).
   \item Preparar evidencias completas para la matriz de conformidad final (capturas, resultados de herramientas, fragmentos de código).
-  \item Mantener actualizado el repositorio del proyecto en GitHub con todos los avances realizados.
 \end{itemize}
 
 % ============================================================

@@ -409,13 +409,23 @@ Las siguientes brechas deben resolverse antes de la entrega final:
 \end{itemize}
 \end{infobox}
 
-\begin{successbox}[Brecha resuelta en Sprint 2 (al 02/07/2026)]
+\begin{successbox}[Brechas resueltas en Sprint 2 (al 03/07/2026)]
 \begin{itemize}
-  \item \textbf{Panel Admin completo:} \cmark~Implementado. CRUD completo de artículos, noticias, recursos y mensajes. Incluye servicio de limpieza (\texttt{cleanup.service.js}) que asigna imágenes verificadas y únicas por sección a todos los documentos de Firestore automáticamente.
-  \item \textbf{Imágenes únicas por sección:} \cmark~Implementado. Cada artículo recibe una fotografía visualmente distinta dentro de su módulo; sub-routing diferencia artículos del mismo tema con títulos distintos.
-  \item \textbf{Renderizado HTML semántico:} \cmark~Implementado. \texttt{ArticleDetail} y \texttt{NoticiasDetalle} detectan el formato del contenido (HTML vs Markdown) y lo renderizan preservando la jerarquía semántica.
+  \item \textbf{Panel Admin completo:} \cmark~CRUD completo de artículos, noticias, recursos y mensajes. Incluye servicio de limpieza (\texttt{cleanup.service.js}) que asigna imágenes verificadas y únicas por sección.
+  \item \textbf{Imágenes únicas por sección:} \cmark~Sub-routing diferencia artículos del mismo tema con títulos distintos.
+  \item \textbf{Renderizado HTML semántico:} \cmark~\texttt{ArticleDetail} y \texttt{NoticiasDetalle} detectan HTML vs Markdown y renderizan preservando jerarquía semántica.
+  \item \textbf{Renombrado a SaludEC:} \cmark~Marca actualizada en toda la interfaz, documentos y repositorio (github.com/zeuspyEC/SaludEC).
 \end{itemize}
 \end{successbox}
+
+\begin{warnbox}[Issues activos detectados por PageSpeed Insights (03/07/2026)]
+\begin{enumerate}
+  \item \textbf{ARIA prohibido (4.1.2):} Lighthouse detecta 2 elementos con atributos \texttt{aria-*} no permitidos para su rol. \textit{Acción:} Identificar mediante \texttt{axe DevTools} y eliminar o reemplazar los atributos incorrectos.
+  \item \textbf{Contraste insuficiente (1.4.3):} WAVE detecta 2 errores de contraste. \textit{Acción:} Ajustar color de texto o fondo hasta ratio $\geq$ 4.5:1 con Chrome DevTools \textit{Color Picker}.
+  \item \textbf{CLS 0.326 en escritorio:} Footer y Navbar sufren layout shift por carga tardía de Google Fonts. Skeleton shimmer usa \texttt{background-position-x} (propiedad no compuesta). \textit{Acción:} \texttt{font-display: optional}; \texttt{transform: translateX} en shimmer.
+  \item \textbf{Rendimiento móvil 66/100:} LCP 5,6 s. Causas: render-blocking de CSS + Google Fonts (640 ms); imágenes Unsplash \texttt{w=800} sobredimensionadas (83 KiB ahorro); JS no utilizado ($\sim$92 KiB). \textit{Acción:} Reducir a \texttt{w=400}; diferir fuentes.
+\end{enumerate}
+\end{warnbox}
 
 % ============================================================
 \section{Cumplimiento de requisitos del enunciado}
@@ -433,8 +443,8 @@ Las siguientes brechas deben resolverse antes de la entrega final:
 6.3 Formularios & \textcolor{successgreen}{\bfseries 100\%} & Formulario contacto + calculadora IMC \\
 6.4 Interactividad & \textcolor{successgreen}{\bfseries 100\%} & 6 componentes interactivos accesibles \\
 6.5 Accesibilidad visual & \textcolor{successgreen}{\bfseries 100\%} & Todos los requisitos implementados \\
-7.1 WCAG 2.2 & \textcolor{warningyellow}{\bfseries 96\%} & 2 criterios parciales (2.5.7, 3.2.6); 5 correcciones adicionales aplicadas en Sprint 2 \\
-7.2 WAI-ARIA & \textcolor{successgreen}{\bfseries 100\%} & Uso correcto y selectivo \\
+7.1 WCAG 2.2 & \textcolor{warningyellow}{\bfseries 92\%} & Lighthouse 92/100 (03/07/2026); 4 issues: 2.5.7, 3.2.6 parciales; 1.4.3 contraste, 4.1.2 ARIA en corrección \\
+7.2 WAI-ARIA & \textcolor{warningyellow}{\bfseries 95\%} & 2 elementos con atributos ARIA prohibidos detectados por Lighthouse (en corrección) \\
 7.3 ATAG & \textcolor{successgreen}{\bfseries 100\%} & Documentado en informe \\
 7.4 UAAG & \textcolor{successgreen}{\bfseries 100\%} & Probado en 5 navegadores + NVDA \\
 \bottomrule

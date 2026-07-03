@@ -660,10 +660,13 @@ axe DevTools & Inicio & 0 violaciones & Críticas + graves \\
 axe DevTools & Atención Primaria & 0 violaciones & \\
 axe DevTools & Vacunación & 0 violaciones & \\
 axe DevTools & Contacto & 0 violaciones & \\
-Lighthouse (escritorio) & Inicio & 97 / 100 & Accessibility score \\
-Lighthouse (escritorio) & Inicio & 94 / 100 & Performance score \\
-Lighthouse (escritorio) & Inicio & 100 / 100 & Best Practices \\
-WAVE & Inicio & 0 errores & Estructura semántica \\
+PageSpeed (móvil, 4G lenta) & Inicio & 92 / 100 & Accessibility --- 03/07/2026 \\
+PageSpeed (móvil, 4G lenta) & Inicio & 66 / 100 & Performance score \\
+PageSpeed (móvil, 4G lenta) & Inicio & 96 / 100 & Best Practices \\
+PageSpeed (escritorio) & Inicio & 92 / 100 & Accessibility --- 03/07/2026 \\
+PageSpeed (escritorio) & Inicio & 80 / 100 & Performance score \\
+PageSpeed (escritorio) & Inicio & 100 / 100 & SEO \\
+WAVE & Inicio & 0 errores; 2 contraste; AIM 10/10 & Alertas SPA (falsos positivos) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -703,8 +706,15 @@ HU-15 & Presentación PPT/Beamer para evaluación final & 5 & Todos & 2 \\
 HU-16 & Matriz WCAG final con evidencias fotográficas & 3 & Javier Quilumba & 2 \\
 HU-17 & Corrección de issues post-evaluación docente & 5 & Todos & 2 \\
 \midrule
+\rowcolor{warningyellow!15}
+HU-18 & Corregir ARIA prohibido: 2 elementos detectados (Lighthouse 92) & 2 & Erick Costa & 2 \\
+HU-19 & Corregir contraste: 2 errores WAVE/Lighthouse (1.4.3) & 2 & Jonathan Tipán & 2 \\
+HU-20 & Reducir CLS de 0.326 a $<$0.1: fuentes + skeleton shimmer & 3 & Javier Quilumba & 2 \\
+HU-21 & Optimizar rendimiento móvil: imágenes w=400, JS tree-shaking & 3 & Erick Costa & 2 \\
+HU-22 & Añadir cabeceras HTTP (CSP, COOP) + \texttt{llms.txt} & 2 & Jonathan Tipán & 2 \\
+\midrule
 \rowcolor{graylight}
-\multicolumn{2}{@{}l}{\textbf{Total Sprint 2}} & \textbf{31} & & \\
+\multicolumn{2}{@{}l}{\textbf{Total Sprint 2}} & \textbf{43} & & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -801,7 +811,8 @@ Para declarar el Sprint 2 completado, se deben cumplir todos los siguientes crit
   \item \cmark~Presentación PPT/Beamer de 10--15 minutos lista para exposición.
   \item \cmark~Matriz WCAG final con capturas reales como evidencia.
   \item \cmark~axe DevTools: 0 violaciones en todas las páginas principales al final del sprint.
-  \item \cmark~Lighthouse Accessibility $\geq 97/100$ mantenido.
+  \item \xmark~Lighthouse Accessibility: 92/100 al 03/07/2026 (objetivo $\geq$95/100 para entrega final; 2 issues activos: contraste y ARIA prohibido).
+  \item \xmark~CLS (escritorio): 0.326 --- requiere corrección antes de entrega (objetivo $<$0.1).
 \end{enumerate}
 
 % ============================================================
@@ -859,8 +870,10 @@ Colecciones Firestore                   & 5 \\
 Criterios WCAG 2.2 implementados        & 25 / 28 evaluados \\
 Criterios WCAG 2.2 parciales            & 2 \\
 Violaciones axe DevTools (producción)   & 0 \\
-Lighthouse Accessibility                & 97 / 100 \\
-Lighthouse Performance                  & 94 / 100 \\
+Lighthouse Accessibility (03/07/2026)   & 92 / 100 (2 issues activos) \\
+PageSpeed Performance --- móvil         & 66 / 100 \\
+PageSpeed Performance --- escritorio    & 80 / 100 \\
+CLS (escritorio)                        & 0.326 (objetivo $<$0.1) \\
 Tiempo de build (Vite)                  & $\sim$3.8 s \\
 Tamaño del bundle principal (gzip)      & 64 KB \\
 Tamaño del bundle Firebase (gzip)       & 114 KB \\

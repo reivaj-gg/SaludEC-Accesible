@@ -16,10 +16,15 @@ El sitio cumple sustancialmente con WCAG 2.2 Nivel AA. La declaración formal de
 
 | Herramienta de evaluación | Resultado |
 |---|---|
-| Lighthouse Accessibility | 100 / 100 |
-| axe DevTools | 0 violaciones |
-| WAVE | 0 errores |
+| Lighthouse Accessibility (PageSpeed Insights, 03/07/2026) | **92 / 100** |
+| Lighthouse Performance — móvil / escritorio | **66 / 80** |
+| Lighthouse Best Practices | **96 / 100** |
+| Lighthouse SEO | **100 / 100** |
+| axe DevTools | 0 violaciones críticas / graves |
+| WAVE | 0 errores · 2 errores de contraste · 2 alertas¹ · AIM 10/10 |
 | NVDA + Chrome (navegación por teclado) | Sin barreras detectadas |
+
+> ¹ Las alertas WAVE («Sin estructura de encabezados» / «Sin regiones de página») son falsos positivos del SPA: WAVE evalúa el shell HTML estático antes de que React renderice el contenido. Con JavaScript activo la estructura completa de landmarks y encabezados está presente.
 
 ### Criterios clave implementados
 
@@ -63,6 +68,20 @@ El sitio cumple sustancialmente con WCAG 2.2 Nivel AA. La declaración formal de
 |---|---|---|
 | 2.5.7 Movimientos de arrastre | Parcial | Cubo 3D usa arrastre; la navegación por Navbar cubre el mismo contenido |
 | 3.2.6 Ayuda consistente | Parcial | Contacto en footer; enlace contextual pendiente en módulos de salud |
+| 1.4.3 Contraste mínimo | Parcial | 2 elementos con ratio insuficiente detectados por WAVE y Lighthouse (03/07/2026) |
+| 4.1.2 ARIA nombre, rol, valor | Parcial | 2 elementos con atributos ARIA prohibidos detectados por Lighthouse |
+
+### Correcciones pendientes (Sprint 2, semana del 07/07/2026)
+
+| Problema | Herramienta que lo detecta | Acción |
+|---|---|---|
+| Atributos ARIA prohibidos en 2 elementos | Lighthouse 92/100 | Identificar y eliminar atributos `aria-*` inválidos para cada rol |
+| Errores de contraste en 2 elementos | WAVE + Lighthouse | Ajustar color de texto o fondo hasta ratio ≥ 4.5:1 |
+| CLS 0.326 en escritorio | PageSpeed Desktop | Fijar `font-display: swap` en Google Fonts; añadir `width`/`height` explícitos en imágenes news cards |
+| Rendimiento móvil 66 / LCP 5.6 s | PageSpeed Mobile | Reducir Unsplash de `w=800` a `w=400`; diferir Google Fonts; reducir JS no utilizado |
+| Skeleton shimmer no compuesto | Chrome DevTools | Reemplazar `background-position-x` por `transform: translateX` en animación shimmer |
+| Sin cabeceras de seguridad (CSP, COOP) | Lighthouse 96/100 | Añadir cabeceras HTTP en `firebase.json` |
+| Navegación agéntica 1/3 | PageSpeed | Añadir `llms.txt`; corregir árbol de accesibilidad |
 
 ### Usabilidad
 
@@ -146,8 +165,8 @@ Panel en `/admin` (requiere autenticación Firebase):
 
 ```bash
 # 1. Clonar e instalar
-git clone https://github.com/zeuspyEC/VitaPrevent.git
-cd VitaPrevent
+git clone https://github.com/zeuspyEC/SaludEC.git
+cd SaludEC
 npm install
 
 # 2. Configurar variables de entorno
