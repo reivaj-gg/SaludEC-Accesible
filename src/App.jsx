@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route, Navigate, useParams } from 'react-router-dom'
+import { lazy, Suspense, useEffect } from 'react'
+import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom'
 import SkipLink from '@components/layout/SkipLink/SkipLink'
 import Navbar from '@components/layout/Navbar/Navbar'
 import Footer from '@components/layout/Footer/Footer'
@@ -31,6 +31,12 @@ const AdminRecursos     = lazy(() => import('@pages/Admin/Recursos/Recursos'))
 const NoticiasDetalle   = lazy(() => import('@pages/NoticiasDetalle/NoticiasDetalle'))
 const Accesibilidad     = lazy(() => import('@pages/Accesibilidad/Accesibilidad'))
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
+
 // Redirige /viejo-modulo/:slug → /nuevo-modulo/:slug
 function SlugRedirect({ to }) {
   const { slug } = useParams()
@@ -52,6 +58,7 @@ function PageLoader() {
 export default function App() {
   return (
     <Suspense fallback={<PageLoader />}>
+      <ScrollToTop />
       <Routes>
         {/* ── Login del admin (sin shell) ── */}
         <Route path="/admin/login" element={<AdminLogin />} />
