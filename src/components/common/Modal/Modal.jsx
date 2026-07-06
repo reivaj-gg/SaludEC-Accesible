@@ -7,44 +7,8 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
   const dialogRef = useRef(null)
   const triggerRef = useRef(null)
 
-  useEffect(() => {
-    if (isOpen) {
-      triggerRef.current = document.activeElement
-      dialogRef.current?.focus()
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-      triggerRef.current?.focus()
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [isOpen])
-
-  // Focus trap
-  useEffect(() => {
-    if (!isOpen) return
-
-    const onKey = (e) => {
-      if (e.key === 'Escape') { onClose(); return }
-
-      if (e.key !== 'Tab') return
-
-      const focusable = dialogRef.current?.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )
-      if (!focusable?.length) return
-
-      const first = focusable[0]
-      const last  = focusable[focusable.length - 1]
-
-      if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
-        e.preventDefault()
-        ;(e.shiftKey ? last : first).focus()
-      }
-    }
-
-    document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [isOpen, onClose])
+    // Modal casero: sin foco atrapado,
+    // sin Esc, foco perdido al cerrar
 
   if (!isOpen) return null
 

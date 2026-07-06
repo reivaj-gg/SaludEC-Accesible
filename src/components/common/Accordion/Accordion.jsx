@@ -9,18 +9,15 @@ export function AccordionItem({ id, question, answer, isOpen, onToggle }) {
   return (
     <div className={`accordion-item ${isOpen ? 'accordion-item--open' : ''}`}>
       <h3 id={headingId} className="accordion-item__heading">
-        <button
-          type="button"
+        <div
           className="accordion-item__trigger"
-          aria-expanded={isOpen}
-          aria-controls={contentId}
           onClick={onToggle}
         >
           <span>{question}</span>
           <span className="accordion-item__icon" aria-hidden="true">
             {isOpen ? '−' : '+'}
           </span>
-        </button>
+        </div>
       </h3>
       <div
         id={contentId}

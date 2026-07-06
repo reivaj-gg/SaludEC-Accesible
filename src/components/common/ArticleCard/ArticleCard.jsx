@@ -19,7 +19,6 @@ export default function ArticleCard({ articulo, moduloBase }) {
         <Link to={href} tabIndex={-1} aria-hidden="true" className="article-card__img-link">
           <img
             src={imagen.url}
-            alt={imagen.alt || titulo}
             title={imagen.alt || titulo}
             className="article-card__img"
             loading="lazy"

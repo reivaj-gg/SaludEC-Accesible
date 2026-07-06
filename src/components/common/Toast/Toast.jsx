@@ -31,9 +31,8 @@ function ToastItem({ toast, onRemove }) {
       <button
         onClick={() => onRemove(toast.id)}
         className="toast__close"
-        aria-label="Cerrar notificación"
       >
-        <span aria-hidden="true">✕</span>
+        <span>✕</span>
       </button>
     </div>
   )

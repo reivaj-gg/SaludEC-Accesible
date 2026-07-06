@@ -94,6 +94,7 @@ export default function Navbar() {
           <Link to={ROUTES.CONTACTO} className="navbar__cta">
             Contacto
           </Link>
+          <a href="/citas" style={{ fontSize: '24px', textDecoration: 'none' }}>📅</a>
 
           <button
             ref={burgerRef}
