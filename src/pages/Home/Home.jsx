@@ -296,7 +296,7 @@ export default function Home() {
         <div className="container">
           <header className="section__header">
             <span className="section__tag">Servicios</span>
-            <h2 id="modules-title" className="section__title">Servicios públicos de salud</h2>
+            <h3 id="modules-title" className="section__title">Servicios públicos de salud</h3>
             <p className="section__subtitle">
               Encuentra información oficial sobre los servicios de salud disponibles para todos los ecuatorianos.
             </p>

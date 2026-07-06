@@ -17,12 +17,12 @@ export default function FormField({
 
   return (
     <div className={`form-field ${error ? 'form-field--error' : ''}`}>
-      <label htmlFor={id} className="form-field__label">
+      {/* <label htmlFor={id} className="form-field__label">
         {label}
         {required && (
           <span className="form-field__required" aria-hidden="true"> *</span>
         )}
-      </label>
+      </label> */}
 
       {hint && (
         <span id={hintId} className="form-field__hint">
@@ -39,6 +39,7 @@ export default function FormField({
         aria-invalid={!!error}
         aria-describedby={describedBy}
         className="form-field__control"
+        placeholder={label}
         {...props}
       />
 

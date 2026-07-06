@@ -30,15 +30,14 @@ export default function PageWrapper({ children, title, description }) {
   }, [pathname, title, description])
 
   return (
-    <main
+    <div
       id="main-content"
       ref={mainRef}
       tabIndex={-1}
-      className="page-wrapper"
-      aria-label={title || 'Contenido principal'}
+      className="contenido page-wrapper"
     >
       {children}
-    </main>
+    </div>
   )
 }
 
